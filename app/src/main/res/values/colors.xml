@@ -19,5 +19,6 @@
     //editnote fragment
     <color name="bg_navigation">#0e4750</color>
     <color name="color_textnote">#ffffff</color>
+    <color name="color_space">#ffffff</color>
 
 </resources>

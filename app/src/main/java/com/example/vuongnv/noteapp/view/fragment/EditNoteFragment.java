@@ -26,9 +26,10 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener {
     private Note mNote;
 
     //view
-    private TextView mTvDate;
-    private TextView mTvtime;
-    private ImageView mIvBack;
+    private ImageView mIvNaviBack;
+    private ImageView mIvNaviShare;
+    private ImageView mIvNaviDelete;
+    private ImageView mIvNaviNext;
 
     //interface
     ICallBackEditNoteI mCallBackEditNote;
@@ -45,21 +46,25 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_editnote, container, false);
         initView(view);
-//        setOnclick();
-//        initData();
-//        setData();
+        setOnclick();
+        initData();
+        setData();
         return view;
     }
 
     private void initView(View view) {
         getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fl_editnote_addnote,new AddNoteFragment(mICallBackAddNote,mNote,NoteUtils.FLAG_EDIT_FRAGMENT)).commit();
-//        mTvDate = view.findViewById(R.id.tv_addnote_date);
-//        mTvtime = view.findViewById(R.id.tv_addnote_time);
-//        mIvBack = view.findViewById(R.id.iv_editnoteback);
+        mIvNaviBack = view.findViewById(R.id.iv_editnote_bottom_back);
+        mIvNaviShare = view.findViewById(R.id.iv_editnote_bottom_share);
+        mIvNaviDelete = view.findViewById(R.id.iv_editnote_bottom_delete);
+        mIvNaviNext = view.findViewById(R.id.iv_editnote_bottom_next);
     }
 
     private void setOnclick() {
-        mIvBack.setOnClickListener(this);
+        mIvNaviBack.setOnClickListener(this);
+        mIvNaviShare.setOnClickListener(this);
+        mIvNaviDelete.setOnClickListener(this);
+        mIvNaviNext.setOnClickListener(this);
     }
 
     private void initData() {
@@ -67,19 +72,40 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setData() {
-        mTvtime.setText(mNote.getmTime());
-        mTvDate.setText(mNote.getmDate());
+//        mTvtime.setText(mNote.getmTime());
+//        mTvDate.setText(mNote.getmDate());
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.iv_editnoteback:
-//                mCallBackEditNote.clickBtnBack();
-//                break;
+            case R.id.iv_editnote_bottom_back:
+                clickBtnNaviBack();
+                break;
+            case R.id.iv_editnote_bottom_share:
+                clickBtnNaviShare();
+                break;
+            case R.id.iv_editnote_bottom_delete:
+                clickBtnNaviDelete();
+                break;
+            case R.id.iv_editnote_bottom_next:
+                clickBtnNaviNext();
+                break;
             default:
                 Log.d(TAG, "onClick() called with: v = [" + v + "]");
                 break;
         }
+    }
+
+    private void clickBtnNaviNext() {
+    }
+
+    private void clickBtnNaviDelete() {
+    }
+
+    private void clickBtnNaviShare() {
+    }
+
+    private void clickBtnNaviBack() {
     }
 }

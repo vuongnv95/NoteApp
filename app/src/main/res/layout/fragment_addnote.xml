@@ -93,8 +93,7 @@
                 android:paddingLeft="@dimen/paddingleft_editnote_time"
                 android:paddingTop="@dimen/paddingtop_editnote_time"
                 android:paddingRight="@dimen/paddingright_editnote_time"
-                android:paddingBottom="@dimen/paddingbottom_editnote_time"
-                android:text="03:07" />
+                android:paddingBottom="@dimen/paddingbottom_editnote_time" />
 
             <TextView
                 android:id="@+id/tv_addnote_date"
@@ -104,8 +103,7 @@
                 android:layout_toLeftOf="@id/tv_addnote_time"
                 android:paddingTop="@dimen/paddingtop_editnote_date"
                 android:paddingRight="@dimen/paddingright_editnote_date"
-                android:paddingBottom="@dimen/paddingbottom_editnote_date"
-                android:text="22/10" />
+                android:paddingBottom="@dimen/paddingbottom_editnote_date"/>
 
                 <EditText
                     android:id="@+id/et_addnote_title"
@@ -176,7 +174,7 @@
                 android:layout_below="@+id/et_addnote_note"
                 android:layout_marginLeft="@dimen/marginleft_editnote_clock"
                 android:layout_toRightOf="@+id/et_addnote_time"
-                android:src="@drawable/ic_delete"
+                android:src="@drawable/ic_remove"
                 android:visibility="gone" />
         </RelativeLayout>
     </ScrollView>

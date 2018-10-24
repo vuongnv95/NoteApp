@@ -239,7 +239,6 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
                 updateTextTime(hourOfDay, minute);
             }
         }, hour, minute, true);
-        mTimePicker.setTitle("Select Time");
         mTimePicker.show();
     }
 
@@ -247,6 +246,7 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         String time = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
         mEtTime.setText(time);
         mTvTime.setText(time);
+        mNote.setmTime(time);
     }
 
     private void clickBtnCamera() {

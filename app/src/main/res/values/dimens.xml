@@ -54,14 +54,20 @@
     <dimen name="paddingtop_addnote_alarm">4dp</dimen>
     <dimen name="padding_editnote_delete">10dp</dimen>
     <dimen name="height_addnode_imgnote">120dp</dimen>
+    <dimen name="with_editnote_iv_back">0dp</dimen>
+    <dimen name="with_editnote_iv_share">0dp</dimen>
+    <dimen name="with_editnote_iv_delete">0dp</dimen>
+    <dimen name="with_editnote_iv_next">0dp</dimen>
+    <dimen name="with_editnote_tv_space">2dp</dimen>
+    <dimen name="padding_editnote_share">10dp</dimen>
 
 
 
     //dialog camera
     <dimen name="margintop_dialog_camera">12dp</dimen>
     <dimen name="margintop_dialog_chooseimage">8dp</dimen>
-    <dimen name="padding_editnote_share">10dp</dimen>
     <dimen name="with_addnode_imgnote">120dp</dimen>
+
 
 
 </resources>

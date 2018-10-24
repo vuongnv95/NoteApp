@@ -15,30 +15,42 @@
 
         <ImageView
             android:id="@+id/iv_editnote_bottom_back"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/with_editnote_iv_back"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_back" />
+        <TextView
+            android:layout_width="@dimen/with_editnote_tv_space"
+            android:background="@color/color_space"
+            android:layout_height="match_parent" />
 
         <ImageView
             android:id="@+id/iv_editnote_bottom_share"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/with_editnote_iv_share"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="@dimen/padding_editnote_share"
             android:src="@drawable/ic_share" />
+        <TextView
+            android:layout_width="@dimen/with_editnote_tv_space"
+            android:background="@color/color_space"
+            android:layout_height="match_parent" />
 
         <ImageView
             android:id="@+id/iv_editnote_bottom_delete"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/with_editnote_iv_delete"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="@dimen/padding_editnote_delete"
             android:src="@drawable/ic_delete" />
+        <TextView
+            android:layout_width="@dimen/with_editnote_tv_space"
+            android:background="@color/color_space"
+            android:layout_height="match_parent" />
 
         <ImageView
             android:id="@+id/iv_editnote_bottom_next"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/with_editnote_iv_next"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_next" />
