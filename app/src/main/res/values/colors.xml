@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="bg_toolbar">#2196F3</color>
+    <color name="textcolor_item_title">#000000</color>
+    <color name="bg_line_below_item">#000000</color>
+    <color name="color_item_subject">#000000</color>
+    <color name="color_editnote_date">#000000</color>
+    <color name="colordialog_camera_text">#000000</color>
+
+    //dialog color
+    <color name="choose_item_red">#e2d77e</color>
+    <color name="choose_item_green">#c5f9ca</color>
+    <color name="choose_item_light">#a8eef9</color>
+    <color name="choose_item_white">#ffffff</color>
+
+    //editnote fragment
+    <color name="bg_navigation">#0e4750</color>
+    <color name="color_textnote">#ffffff</color>
+
+</resources>

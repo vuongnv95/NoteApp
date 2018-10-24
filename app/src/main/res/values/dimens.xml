@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //note
+    <dimen name="textsize_note">18sp</dimen>
+    <dimen name="marginright_btnadd">8dp</dimen>
+    <dimen name="margin_gv_note">8dp</dimen>
+    <dimen name="marginleft_item_title">8dp</dimen>
+    <dimen name="paddingleft_item_title">8dp</dimen>
+    <dimen name="paddingrightitem_title">8dp</dimen>
+    <dimen name="textsize_item_title_note">20dp</dimen>
+    <dimen name="padding_item_title">16dp</dimen>
+    <dimen name="title_line">1dp</dimen>
+    <dimen name="marrgin_item_clock">20dp</dimen>
+    <dimen name="marrgin_right_item_clock">16dp</dimen>
+    <dimen name="marrgintop_item_clock">8dp</dimen>
+    <dimen name="marrginleft_item_line">8dp</dimen>
+    <dimen name="marrginright_item_line">8dp</dimen>
+    <dimen name="textsize_item_subject">16sp</dimen>
+    <dimen name="paddingtop_item_subject">8dp</dimen>
+    <dimen name="paddingbottom_item_subject">8dp</dimen>
+    <dimen name="paddingleft_item_subject">16dp</dimen>
+    <dimen name="paddingright_item_subject">16dp</dimen>
+    <dimen name="paddingright_item_time">8dp</dimen>
+    <dimen name="paddingtop_item_time">8dp</dimen>
+    <dimen name="paddingleft_item_time">8dp</dimen>
+    <dimen name="paddingbottom_item_time">16dp</dimen>
+    <dimen name="horizontal_gv_note">10dp</dimen>
+    <dimen name="verticalspacing_gv_note">10dp</dimen>
+    <dimen name="padding_note_icon">3dp</dimen>
+
+
+    //fragment edit note
+    <dimen name="marginLeft_icon_note">20dp</dimen>
+    <dimen name="padding_check">10dp</dimen>
+    <dimen name="padding_gallery">10dp</dimen>
+    <dimen name="padding_camera">10dp</dimen>
+    <dimen name="padding_note">8dp</dimen>
+    <dimen name="padding_icback">8dp</dimen>
+    <dimen name="padding_icnote">8dp</dimen>
+    <dimen name="paddingtop_editnote_time">16dp</dimen>
+    <dimen name="paddingleft_editnote_time">8dp</dimen>
+    <dimen name="paddingright_editnote_time">16dp</dimen>
+    <dimen name="paddingbottom_editnote_time">32dp</dimen>
+    <dimen name="paddingtop_editnote_date">16dp</dimen>
+    <dimen name="paddingright_editnote_date">8dp</dimen>
+    <dimen name="paddingbottom_editnote_date">32dp</dimen>
+    <dimen name="paddingright_editnote_title">8dp</dimen>
+    <dimen name="marginleft_editnote_clock">32dp</dimen>
+    <dimen name="marginleft_editnote_date">16dp</dimen>
+    <dimen name="textsize_editnote_date">16sp</dimen>
+    <dimen name="padding_editnote_note">3dp</dimen>
+    <dimen name="padding_addnote_note">3dp</dimen>
+    <dimen name="paddingleft_addnote_alarm">24dp</dimen>
+    <dimen name="paddingtop_addnote_alarm">4dp</dimen>
+    <dimen name="padding_editnote_delete">10dp</dimen>
+    <dimen name="height_addnode_imgnote">120dp</dimen>
+
+
+
+    //dialog camera
+    <dimen name="margintop_dialog_camera">12dp</dimen>
+    <dimen name="margintop_dialog_chooseimage">8dp</dimen>
+    <dimen name="padding_editnote_share">10dp</dimen>
+    <dimen name="with_addnode_imgnote">120dp</dimen>
+
+
+</resources>

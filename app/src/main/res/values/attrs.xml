@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="crop_image_menu_crop" type="drawable">@null</item>
+    <declare-styleable name="ColorView">
+        <attr name="color_background" format="color"></attr>
+    </declare-styleable>
+</resources>

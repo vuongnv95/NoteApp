@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">NoteApplication</string>
+    <string name="note">Note</string>
+
+    //edit note fragment
+    <string name="title_editnote">Title</string>
+    <string name="note_editnote">Note</string>
+
+    //add note fragment
+    <string name="addnode_alarm">Alarm</string>
+    <string name="insertpicture">Insert Picture</string>
+
+    //Color dialog
+    <string name="colordialog_title">Choose Color</string>
+</resources>

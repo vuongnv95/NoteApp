@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activitis.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_addnote_title"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/bg_toolbar">
+
+        <ImageView
+            android:id="@+id/iv_addnote_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_back" />
+
+        <ImageView
+            android:id="@+id/iv_addnote_note"
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/marginLeft_icon_note"
+            android:padding="@dimen/padding_addnote_note"
+            android:src="@drawable/ic_note" />
+
+        <TextView
+            android:id="@+id/tv_addnote_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/iv_addnote_note"
+            android:gravity="center_vertical"
+            android:text="@string/note"
+            android:textColor="@color/color_textnote"
+            android:textSize="@dimen/textsize_note"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_addnote_add"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/marginright_btnadd"
+            android:padding="@dimen/padding_check"
+            android:src="@drawable/ic_check" />
+
+        <ImageView
+            android:id="@+id/iv_addnote_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/marginright_btnadd"
+            android:layout_toLeftOf="@+id/iv_addnote_add"
+            android:padding="@dimen/padding_gallery"
+            android:src="@drawable/ic_gallery" />
+
+        <ImageView
+            android:id="@+id/iv_addnote_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/marginright_btnadd"
+            android:layout_toLeftOf="@+id/iv_addnote_gallery"
+            android:padding="@dimen/padding_camera"
+            android:src="@drawable/ic_camera" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rl_addnote_title">
+
+        <RelativeLayout
+            android:id="@+id/rl_addnote_note"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_addnote_title">
+
+            <ImageView
+                android:id="@+id/iv_addnote_node"
+                android:layout_width="@dimen/with_addnode_imgnote"
+                android:layout_height="@dimen/height_addnode_imgnote"
+                android:src="@drawable/ic_choose_photo"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_addnote_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_addnote_node"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="@dimen/paddingleft_editnote_time"
+                android:paddingTop="@dimen/paddingtop_editnote_time"
+                android:paddingRight="@dimen/paddingright_editnote_time"
+                android:paddingBottom="@dimen/paddingbottom_editnote_time"
+                android:text="03:07" />
+
+            <TextView
+                android:id="@+id/tv_addnote_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_addnote_node"
+                android:layout_toLeftOf="@id/tv_addnote_time"
+                android:paddingTop="@dimen/paddingtop_editnote_date"
+                android:paddingRight="@dimen/paddingright_editnote_date"
+                android:paddingBottom="@dimen/paddingbottom_editnote_date"
+                android:text="22/10" />
+
+                <EditText
+                    android:id="@+id/et_addnote_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_addnote_date"
+                    android:hint="@string/title_editnote"
+                    android:paddingLeft="@dimen/paddingright_editnote_title"
+                    android:paddingRight="@dimen/paddingright_editnote_title" />
+
+
+                <EditText
+                    android:id="@+id/et_addnote_note"
+                    android:layout_below="@+id/et_addnote_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/note_editnote"
+                    android:paddingLeft="@dimen/paddingright_editnote_title"
+                    android:paddingRight="@dimen/paddingright_editnote_title" />
+
+            <ImageView
+                android:id="@+id/iv_addnote_clock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_addnote_note"
+                android:layout_marginLeft="@dimen/marginleft_editnote_clock"
+                android:src="@drawable/ic_clock" />
+
+            <TextView
+                android:id="@+id/tv_addnote_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_addnote_note"
+                android:layout_toRightOf="@+id/iv_addnote_clock"
+                android:paddingLeft="@dimen/paddingleft_addnote_alarm"
+                android:paddingTop="@dimen/paddingtop_addnote_alarm"
+                android:text="@string/addnode_alarm"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_addnote_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_addnote_note"
+                android:layout_marginLeft="@dimen/marginleft_editnote_date"
+                android:layout_toRightOf="@+id/iv_addnote_clock"
+                android:hint="Date"
+                android:textColorHint="@color/color_editnote_date"
+                android:textSize="@dimen/textsize_editnote_date"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/et_addnote_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_addnote_note"
+                android:layout_marginLeft="@dimen/marginleft_editnote_date"
+                android:layout_toRightOf="@+id/et_addnote_date"
+                android:hint="Time"
+                android:textColorHint="@color/color_editnote_date"
+                android:textSize="@dimen/textsize_editnote_date"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_addnote_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_addnote_note"
+                android:layout_marginLeft="@dimen/marginleft_editnote_clock"
+                android:layout_toRightOf="@+id/et_addnote_time"
+                android:src="@drawable/ic_delete"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

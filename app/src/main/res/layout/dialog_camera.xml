@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:id="@+id/tb_camera"
+        android:layout_marginTop="@dimen/margintop_dialog_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_choose_photo" />
+        <TextView android:layout_width="0dp"
+            android:layout_weight="3"
+            android:textColor="@color/colordialog_camera_text"
+            android:text="Take Photo"
+            android:textStyle="normal"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"/>
+    </TableRow>
+    <TableRow
+        android:id="@+id/tb_choose_image"
+        android:layout_marginTop="@dimen/margintop_dialog_chooseimage"
+        android:layout_below="@+id/tb_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_choose_photo" />
+        <TextView android:layout_width="0dp"
+            android:layout_weight="3"
+            android:textColor="@color/colordialog_camera_text"
+            android:text="Choose Image"
+            android:textStyle="normal"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"/>
+    </TableRow>
+
+
+</RelativeLayout>

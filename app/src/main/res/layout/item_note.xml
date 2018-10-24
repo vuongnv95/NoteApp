@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:elevation="4dp"
+    android:background="#ffffff"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_item_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:padding="@dimen/padding_item_title"
+            android:text="Note1"
+            android:textColor="@color/textcolor_item_title"
+            android:textSize="@dimen/textsize_item_title_note"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/marrgintop_item_clock"
+            android:layout_marginRight="@dimen/marrgin_right_item_clock"
+            android:src="@drawable/ic_clock" />
+
+        <TextView
+            android:id="@+id/tv_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_line"
+            android:layout_below="@id/tv_item_title"
+            android:layout_marginLeft="@dimen/marrginleft_item_line"
+            android:layout_marginRight="@dimen/marrginright_item_line"
+            android:background="@color/bg_line_below_item" />
+
+        <TextView
+            android:id="@+id/tv_item_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_line"
+            android:lines="3"
+            android:paddingLeft="@dimen/paddingleft_item_subject"
+            android:paddingTop="@dimen/paddingtop_item_subject"
+            android:paddingRight="@dimen/paddingright_item_subject"
+            android:paddingBottom="@dimen/paddingbottom_item_subject"
+            android:text="kjldhfgjdfkghdkhfgkdfjhgfdhjg"
+            android:textColor="@color/color_item_subject"
+            android:textSize="@dimen/textsize_item_subject" />
+
+        <TextView
+            android:id="@+id/tv_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_item_subject"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/paddingleft_item_time"
+            android:paddingTop="@dimen/paddingtop_item_time"
+            android:paddingRight="@dimen/paddingright_item_time"
+            android:paddingBottom="@dimen/paddingbottom_item_time"
+            android:text="03:07" />
+
+        <TextView
+            android:id="@+id/tv_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_item_subject"
+            android:layout_toLeftOf="@id/tv_item_time"
+            android:paddingLeft="@dimen/paddingleft_item_time"
+            android:paddingTop="@dimen/paddingtop_item_time"
+            android:paddingRight="@dimen/paddingright_item_time"
+            android:paddingBottom="@dimen/paddingbottom_item_time"
+            android:text="22/10" />
+    </RelativeLayout>
+
+</LinearLayout>
