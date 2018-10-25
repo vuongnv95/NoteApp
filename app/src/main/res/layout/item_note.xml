@@ -22,7 +22,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/iv_clock"
+            android:id="@+id/iv_item_clock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -67,17 +67,6 @@
             android:paddingBottom="@dimen/paddingbottom_item_time"
             android:text="03:07" />
 
-        <TextView
-            android:id="@+id/tv_item_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_item_subject"
-            android:layout_toLeftOf="@id/tv_item_time"
-            android:paddingLeft="@dimen/paddingleft_item_time"
-            android:paddingTop="@dimen/paddingtop_item_time"
-            android:paddingRight="@dimen/paddingright_item_time"
-            android:paddingBottom="@dimen/paddingbottom_item_time"
-            android:text="22/10" />
     </RelativeLayout>
 
 </LinearLayout>

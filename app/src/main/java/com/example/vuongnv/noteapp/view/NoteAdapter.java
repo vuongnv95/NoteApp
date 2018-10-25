@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 import com.example.vuongnv.noteapp.R;
 import com.example.vuongnv.noteapp.model.Note;
+import com.example.vuongnv.noteapp.view.utils.NoteUtils;
 
 import java.util.ArrayList;
 
@@ -46,10 +48,10 @@ public class NoteAdapter extends BaseAdapter {
         if (convertView == null){
             convertView = mLayoutInflater.inflate(R.layout.item_note,null);
             viewHolder = new ViewHolder();
-            viewHolder.mTvDate = convertView.findViewById(R.id.tv_item_date);
             viewHolder.mTvTime = convertView.findViewById(R.id.tv_item_time);
             viewHolder.mTvTitle = convertView.findViewById(R.id.tv_item_title);
             viewHolder.mTvSubject = convertView.findViewById(R.id.tv_item_subject);
+            viewHolder.mIvClock = convertView.findViewById(R.id.iv_item_clock);
             viewHolder.mRlItem = convertView.findViewById(R.id.rl_item_note);
             convertView.setTag(viewHolder);
         }else {
@@ -58,8 +60,12 @@ public class NoteAdapter extends BaseAdapter {
         Note note = mArrNote.get(position);
         viewHolder.mTvTitle.setText(note.getmTitle());
         viewHolder.mTvSubject.setText(note.getmSubject());
-        viewHolder.mTvDate.setText(note.getmDate());
-        viewHolder.mTvTime.setText(note.getmTime());
+        viewHolder.mTvTime.setText(note.getmSetupTime());
+        if (note.getmIsAlarm() == NoteUtils.IS_ALARM) {
+            viewHolder.mIvClock.setVisibility(View.VISIBLE);
+        }else{
+            viewHolder.mIvClock.setVisibility(View.GONE);
+        }
         viewHolder.mRlItem.setBackgroundColor(note.getmColor());
         return convertView;
     }
@@ -68,7 +74,7 @@ public class NoteAdapter extends BaseAdapter {
         TextView mTvTitle;
         TextView mTvSubject;
         TextView mTvTime;
-        TextView mTvDate;
+        ImageView mIvClock;
         RelativeLayout mRlItem;
     }
 }

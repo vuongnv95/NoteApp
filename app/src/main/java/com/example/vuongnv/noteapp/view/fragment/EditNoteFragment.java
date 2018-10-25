@@ -10,13 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.vuongnv.noteapp.R;
 import com.example.vuongnv.noteapp.model.Note;
 import com.example.vuongnv.noteapp.view.callback.ICallBackAddNote;
 import com.example.vuongnv.noteapp.view.callback.ICallBackEditNoteI;
 import com.example.vuongnv.noteapp.view.utils.NoteUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SuppressLint("ValidFragment")
@@ -32,13 +34,23 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener {
     private ImageView mIvNaviNext;
 
     //interface
-    ICallBackEditNoteI mCallBackEditNote;
-    ICallBackAddNote mICallBackAddNote;
+    private ICallBackEditNoteI mCallBackEditNote;
+    private ICallBackAddNote mICallBackAddNote;
 
-    public EditNoteFragment(ICallBackEditNoteI callBackEditNote, ICallBackAddNote iCallBackAddNote,Note note) {
+    //
+    private AddNoteFragment mAddNoteFragment;
+
+    //
+    private ArrayList<Note> mArrNote;
+    private int mPosition;
+
+
+    public EditNoteFragment(ICallBackEditNoteI callBackEditNote, ICallBackAddNote iCallBackAddNote, ArrayList<Note> arrNote,int position) {
         this.mCallBackEditNote = callBackEditNote;
         this.mICallBackAddNote = iCallBackAddNote;
-        this.mNote = note;
+        this.mArrNote = arrNote;
+        this.mPosition = position;
+        this.mNote = this.mArrNote.get(position);
     }
 
     @Nullable
@@ -53,7 +65,8 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(View view) {
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fl_editnote_addnote,new AddNoteFragment(mICallBackAddNote,mNote,NoteUtils.FLAG_EDIT_FRAGMENT)).commit();
+        mAddNoteFragment = new AddNoteFragment(mICallBackAddNote,mNote,NoteUtils.FLAG_EDIT_FRAGMENT);
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fl_editnote_addnote,mAddNoteFragment).commit();
         mIvNaviBack = view.findViewById(R.id.iv_editnote_bottom_back);
         mIvNaviShare = view.findViewById(R.id.iv_editnote_bottom_share);
         mIvNaviDelete = view.findViewById(R.id.iv_editnote_bottom_delete);
@@ -98,6 +111,7 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener {
     }
 
     private void clickBtnNaviNext() {
+
     }
 
     private void clickBtnNaviDelete() {
@@ -107,5 +121,6 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener {
     }
 
     private void clickBtnNaviBack() {
+
     }
 }

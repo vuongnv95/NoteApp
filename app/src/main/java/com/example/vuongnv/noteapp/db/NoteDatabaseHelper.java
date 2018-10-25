@@ -44,7 +44,9 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
         values.put(DatabaseUtils.COLUMN_NOTE_SUBJECT, note.getmSubject());
         values.put(DatabaseUtils.COLUMN_NOTE_DATE, note.getmDate());
         values.put(DatabaseUtils.COLUMN_NOTE_TIME, note.getmTime());
+        values.put(DatabaseUtils.COLUMN_NOTE_TIMESETUP, note.getmSetupTime());
         values.put(DatabaseUtils.COLUMN_NOTE_COLOR, note.getmColor());
+        values.put(DatabaseUtils.COLUMN_NOTE_ALARM, note.getmIsAlarm());
         values.put(DatabaseUtils.COLUMN_NOTE_IMAGE, note.getmImageNote());
         long index = db.insert(DatabaseUtils.TABLE_NAME, null, values);
         Log.d("Vuong", "addNote() called with: index = [" + index + "]");
@@ -62,7 +64,9 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
         int indexSubject = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_SUBJECT);
         int indexDate = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_DATE);
         int indexTime = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_TIME);
+        int indexTimeSetup = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_TIMESETUP);
         int indexColor = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_COLOR);
+        int indexIsAlarm= cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_ALARM);
         int indexImage = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_IMAGE);
         cursor.moveToFirst();
         Log.d("Vuong", "getCount() called"+cursor.getCount());
@@ -74,7 +78,9 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
             note.setmSubject(cursor.getString(indexSubject));
             note.setmDate(cursor.getString(indexDate));
             note.setmTime(cursor.getString(indexTime));
+            note.setmSetupTime(cursor.getString(indexTimeSetup));
             note.setmColor(Integer.parseInt(cursor.getString(indexColor)));
+            note.setmIsAlarm(cursor.getInt(indexIsAlarm));
             note.setmImageNote(cursor.getBlob(indexImage));
             noteList.add(note);
             cursor.moveToNext();
@@ -90,7 +96,9 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
         values.put(DatabaseUtils.COLUMN_NOTE_SUBJECT, note.getmSubject());
         values.put(DatabaseUtils.COLUMN_NOTE_DATE, note.getmDate());
         values.put(DatabaseUtils.COLUMN_NOTE_TIME, note.getmTime());
+        values.put(DatabaseUtils.COLUMN_NOTE_TIMESETUP, note.getmSetupTime());
         values.put(DatabaseUtils.COLUMN_NOTE_COLOR, note.getmColor());
+        values.put(DatabaseUtils.COLUMN_NOTE_ALARM, note.getmIsAlarm());
         values.put(DatabaseUtils.COLUMN_NOTE_IMAGE, note.getmImageNote());
 
         // updating row

@@ -12,7 +12,7 @@
         android:layout_height="?android:attr/actionBarSize">
         <ImageView
             android:id="@+id/iv_addnote_note"
-            android:layout_width="64dp"
+            android:layout_width="@dimen/with_addnote_iconnode"
             android:src="@drawable/ic_note"
             android:padding="@dimen/padding_note_icon"
             android:layout_height="match_parent" />
@@ -28,6 +28,7 @@
         <ImageView
             android:id="@+id/iv_addnote_add"
             android:layout_marginRight="@dimen/marginright_btnadd"
+            android:padding="@dimen/padding_note_icon"
             android:layout_width="wrap_content"
             android:src="@drawable/ic_plus"
             android:layout_alignParentEnd="true"

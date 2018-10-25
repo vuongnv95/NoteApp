@@ -8,7 +8,9 @@ public class Note implements Serializable {
     private String mSubject;
     private String mDate;
     private String mTime;
+    private String mSetupTime;
     private int mColor;
+    private int mIsAlarm;
     private byte[] mImageNote;
 
     public Note() {
@@ -22,12 +24,14 @@ public class Note implements Serializable {
         this.mColor = mColor;
     }
 
-    public Note(String mTitle, String mSubject, String mDate, String mTime, int mColor, byte[] mImageNote) {
+    public Note(String mTitle, String mSubject, String mDate, String mTime, String mSetupTime, int mColor, int mAlarm, byte[] mImageNote) {
         this.mTitle = mTitle;
         this.mSubject = mSubject;
         this.mDate = mDate;
         this.mTime = mTime;
+        this.mSetupTime = mSetupTime;
         this.mColor = mColor;
+        this.mIsAlarm = mAlarm;
         this.mImageNote = mImageNote;
     }
 
@@ -95,5 +99,21 @@ public class Note implements Serializable {
 
     public void setmIdNode(int mIdNode) {
         this.mIdNode = mIdNode;
+    }
+
+    public String getmSetupTime() {
+        return mSetupTime;
+    }
+
+    public void setmSetupTime(String mSetupTime) {
+        this.mSetupTime = mSetupTime;
+    }
+
+    public int getmIsAlarm() {
+        return mIsAlarm;
+    }
+
+    public void setmIsAlarm(int mAlarm) {
+        this.mIsAlarm = mAlarm;
     }
 }

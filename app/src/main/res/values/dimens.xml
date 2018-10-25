@@ -26,14 +26,14 @@
     <dimen name="paddingbottom_item_time">16dp</dimen>
     <dimen name="horizontal_gv_note">10dp</dimen>
     <dimen name="verticalspacing_gv_note">10dp</dimen>
-    <dimen name="padding_note_icon">3dp</dimen>
+    <dimen name="padding_note_icon">10dp</dimen>
 
 
     //fragment edit note
     <dimen name="marginLeft_icon_note">20dp</dimen>
-    <dimen name="padding_check">10dp</dimen>
-    <dimen name="padding_gallery">10dp</dimen>
-    <dimen name="padding_camera">10dp</dimen>
+    <dimen name="padding_check">15dp</dimen>
+    <dimen name="padding_gallery">15dp</dimen>
+    <dimen name="padding_camera">15dp</dimen>
     <dimen name="padding_note">8dp</dimen>
     <dimen name="padding_icback">8dp</dimen>
     <dimen name="padding_icnote">8dp</dimen>
@@ -45,11 +45,11 @@
     <dimen name="paddingright_editnote_date">8dp</dimen>
     <dimen name="paddingbottom_editnote_date">32dp</dimen>
     <dimen name="paddingright_editnote_title">8dp</dimen>
-    <dimen name="marginleft_editnote_clock">32dp</dimen>
-    <dimen name="marginleft_editnote_date">16dp</dimen>
+    <dimen name="marginleft_editnote_clock">8dp</dimen>
+    <dimen name="marginleft_editnote_date">8dp</dimen>
     <dimen name="textsize_editnote_date">16sp</dimen>
     <dimen name="padding_editnote_note">3dp</dimen>
-    <dimen name="padding_addnote_note">3dp</dimen>
+    <dimen name="padding_addnote_note">2dp</dimen>
     <dimen name="paddingleft_addnote_alarm">24dp</dimen>
     <dimen name="paddingtop_addnote_alarm">4dp</dimen>
     <dimen name="padding_editnote_delete">10dp</dimen>
@@ -67,7 +67,17 @@
     <dimen name="margintop_dialog_camera">12dp</dimen>
     <dimen name="margintop_dialog_chooseimage">8dp</dimen>
     <dimen name="with_addnode_imgnote">120dp</dimen>
+    <dimen name="margintop_editnote_space">10dp</dimen>
+    <dimen name="marginbottom_editnote_space">10dp</dimen>
+    <dimen name="padding_addnote_back">3dp</dimen>
+    <dimen name="marginLeft_addnote_note">30dp</dimen>
+    <dimen name="with_addnote_iconnode">64dp</dimen>
 
+    //
+    <dimen name="text_spinner">12sp</dimen>
+    <dimen name="padding_addnote_delete">10dp</dimen>
+    <dimen name="padding_addnote_clock">10dp</dimen>
+    <dimen name="height_alarm">48dp</dimen>
 
 
 </resources>

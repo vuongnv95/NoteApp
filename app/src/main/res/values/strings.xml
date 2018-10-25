@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NoteApplication</string>
+    <string name="app_name">Note</string>
     <string name="note">Note</string>
 
     //edit note fragment
@@ -12,4 +12,32 @@
 
     //Color dialog
     <string name="colordialog_title">Choose Color</string>
+
+    //value date
+    <string name="firstitem"></string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="nextwednesday">Next Wednesday</string>
+    <string name="other">Other</string>
+    //value time
+    <string name="time1">09:00</string>
+    <string name="time2">13:00</string>
+    <string name="time3">17:00</string>
+    <string name="time4">20:00</string>
+    <string name="time5">Other</string>
+
+
+    <string-array name="spin_date">
+        <item>@string/today</item>
+        <item>@string/tomorrow</item>
+        <item>@string/nextwednesday</item>
+        <item>@string/other</item>
+    </string-array>
+    <string-array name="spin_time">
+        <item>@string/time1</item>
+        <item>@string/time2</item>
+        <item>@string/time3</item>
+        <item>@string/time4</item>
+        <item>@string/time5</item>
+    </string-array>
 </resources>
