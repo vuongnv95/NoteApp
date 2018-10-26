@@ -1,4 +1,4 @@
-package com.example.vuongnv.noteapp.view.fragment;
+package com.example.vuongnv.noteapp.view.addnote;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,7 +22,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -38,14 +37,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.vuongnv.noteapp.R;
-import com.example.vuongnv.noteapp.model.Note;
-import com.example.vuongnv.noteapp.model.prenter.NoteChangeIndicator;
-import com.example.vuongnv.noteapp.presenter.NoteChangePresenter;
+import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.view.callback.ICallBackAddNote;
 import com.example.vuongnv.noteapp.view.dialog.CameraDialog;
 import com.example.vuongnv.noteapp.view.dialog.ColorDialog;
-import com.example.vuongnv.noteapp.view.presenter.INoteChangeView;
-import com.example.vuongnv.noteapp.view.utils.NoteUtils;
+import com.example.vuongnv.noteapp.utils.NoteUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -56,7 +52,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 

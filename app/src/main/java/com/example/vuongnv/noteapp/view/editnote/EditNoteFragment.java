@@ -1,4 +1,4 @@
-package com.example.vuongnv.noteapp.view.fragment;
+package com.example.vuongnv.noteapp.view.editnote;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -12,13 +12,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.vuongnv.noteapp.R;
-import com.example.vuongnv.noteapp.model.Note;
+import com.example.vuongnv.noteapp.data.db.model.Note;
+import com.example.vuongnv.noteapp.view.addnote.AddNoteFragment;
 import com.example.vuongnv.noteapp.view.callback.ICallBackAddNote;
 import com.example.vuongnv.noteapp.view.callback.ICallBackEditNoteI;
-import com.example.vuongnv.noteapp.view.utils.NoteUtils;
+import com.example.vuongnv.noteapp.utils.NoteUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 @SuppressLint("ValidFragment")

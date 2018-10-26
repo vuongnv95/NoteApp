@@ -1,9 +1,9 @@
-package com.example.vuongnv.noteapp.model.prenter;
+package com.example.vuongnv.noteapp.view.addnote;
 
 import android.content.Context;
 
-import com.example.vuongnv.noteapp.db.DatabaseManager;
-import com.example.vuongnv.noteapp.model.Note;
+import com.example.vuongnv.noteapp.data.db.DatabaseManager;
+import com.example.vuongnv.noteapp.data.db.model.Note;
 
 
 public class NoteChangeIndicator {

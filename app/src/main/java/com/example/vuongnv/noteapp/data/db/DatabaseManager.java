@@ -1,10 +1,10 @@
-package com.example.vuongnv.noteapp.db;
+package com.example.vuongnv.noteapp.data.db;
 
 import android.content.Context;
 
 
-import com.example.vuongnv.noteapp.model.Note;
-import com.example.vuongnv.noteapp.view.utils.DatabaseUtils;
+import com.example.vuongnv.noteapp.data.db.model.Note;
+import com.example.vuongnv.noteapp.utils.DatabaseUtils;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.vuongnv.noteapp.view.utils;
+package com.example.vuongnv.noteapp.utils;
 
 public class DatabaseUtils {
     public static final int DATABASE_VERSION = 1;

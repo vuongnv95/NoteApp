@@ -1,7 +1,7 @@
-package com.example.vuongnv.noteapp.db;
+package com.example.vuongnv.noteapp.data.db;
 
 
-import com.example.vuongnv.noteapp.model.Note;
+import com.example.vuongnv.noteapp.data.db.model.Note;
 
 import java.util.List;
 

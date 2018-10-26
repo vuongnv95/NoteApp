@@ -1,9 +1,7 @@
-package com.example.vuongnv.noteapp.presenter;
+package com.example.vuongnv.noteapp.view.notedetail;
 
 
-import com.example.vuongnv.noteapp.model.Note;
-import com.example.vuongnv.noteapp.model.prenter.NoteIndicator;
-import com.example.vuongnv.noteapp.view.presenter.INoteView;
+import com.example.vuongnv.noteapp.data.db.model.Note;
 
 import java.util.List;
 

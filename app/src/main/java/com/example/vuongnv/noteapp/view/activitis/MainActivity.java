@@ -7,16 +7,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 
 import com.example.vuongnv.noteapp.R;
-import com.example.vuongnv.noteapp.model.Note;
+import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.view.callback.ICallBackAddNote;
 import com.example.vuongnv.noteapp.view.callback.ICallBackEditNoteI;
-import com.example.vuongnv.noteapp.view.fragment.AddNoteFragment;
-import com.example.vuongnv.noteapp.view.fragment.EditNoteFragment;
-import com.example.vuongnv.noteapp.view.fragment.NoteFragment;
-import com.example.vuongnv.noteapp.view.utils.NoteUtils;
+import com.example.vuongnv.noteapp.view.addnote.AddNoteFragment;
+import com.example.vuongnv.noteapp.view.editnote.EditNoteFragment;
+import com.example.vuongnv.noteapp.view.notedetail.NoteFragment;
+import com.example.vuongnv.noteapp.utils.NoteUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements ICallBackEditNoteI, ICallBackAddNote, NoteFragment.CallBackNoteFragment {
@@ -39,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements ICallBackEditNote
     @Override
     public void createAddFragment() {
         mFlagFragment = NoteUtils.FLAG_ADD_FRAGMENT;
+        mAddNoteFragment = new AddNoteFragment(this,null,mFlagFragment);
         mFragmentManager.beginTransaction().replace(R.id.fl_main, mAddNoteFragment).addToBackStack("add").commit();
     }
 

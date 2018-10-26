@@ -1,4 +1,4 @@
-package com.example.vuongnv.noteapp.view;
+package com.example.vuongnv.noteapp.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 
 import com.example.vuongnv.noteapp.R;
-import com.example.vuongnv.noteapp.model.Note;
-import com.example.vuongnv.noteapp.view.utils.NoteUtils;
+import com.example.vuongnv.noteapp.data.db.model.Note;
+import com.example.vuongnv.noteapp.utils.NoteUtils;
 
 import java.util.ArrayList;
 

@@ -1,9 +1,7 @@
-package com.example.vuongnv.noteapp.presenter;
+package com.example.vuongnv.noteapp.view.addnote;
 
 
-import com.example.vuongnv.noteapp.model.Note;
-import com.example.vuongnv.noteapp.model.prenter.NoteChangeIndicator;
-import com.example.vuongnv.noteapp.view.presenter.INoteChangeView;
+import com.example.vuongnv.noteapp.data.db.model.Note;
 
 public class NoteChangePresenter implements NoteChangeIndicator.CallBackChangeNoteListenner{
 

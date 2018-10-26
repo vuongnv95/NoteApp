@@ -1,4 +1,4 @@
-package com.example.vuongnv.noteapp.view.fragment;
+package com.example.vuongnv.noteapp.view.notedetail;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -14,12 +14,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.example.vuongnv.noteapp.R;
-import com.example.vuongnv.noteapp.model.Note;
-import com.example.vuongnv.noteapp.model.prenter.NoteIndicator;
-import com.example.vuongnv.noteapp.presenter.NotePresenter;
-import com.example.vuongnv.noteapp.view.NoteAdapter;
+import com.example.vuongnv.noteapp.data.db.model.Note;
+import com.example.vuongnv.noteapp.view.adapter.NoteAdapter;
 import com.example.vuongnv.noteapp.view.callback.ICallNoteFragment;
-import com.example.vuongnv.noteapp.view.presenter.INoteView;
 
 import java.util.ArrayList;
 import java.util.List;

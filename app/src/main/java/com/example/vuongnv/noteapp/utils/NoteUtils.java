@@ -1,4 +1,4 @@
-package com.example.vuongnv.noteapp.view.utils;
+package com.example.vuongnv.noteapp.utils;
 
 public class NoteUtils {
     public static final int IS_ALARM = 1;

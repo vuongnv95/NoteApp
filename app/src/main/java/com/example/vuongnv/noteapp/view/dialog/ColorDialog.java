@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.example.vuongnv.noteapp.R;
 import com.example.vuongnv.noteapp.view.customview.ColorView;
-import com.example.vuongnv.noteapp.view.utils.NoteUtils;
+import com.example.vuongnv.noteapp.utils.NoteUtils;
 
 
 public class ColorDialog extends Dialog implements View.OnClickListener {

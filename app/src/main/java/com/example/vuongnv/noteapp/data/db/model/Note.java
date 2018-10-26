@@ -1,4 +1,4 @@
-package com.example.vuongnv.noteapp.model;
+package com.example.vuongnv.noteapp.data.db.model;
 
 import java.io.Serializable;
 
