@@ -35,10 +35,10 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addNote(Note note) {
-        Log.d("Vuong", "addNote() called with: note = [" + note + "]");
+    public long addNote(Note note) {
+        Log.d("Vuong", "requestAddNote() called with: note = [" + note + "]");
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.d("Vuong", "addNote() called with: isOpen = [" + db.isOpen() + "]");
+        Log.d("Vuong", "requestAddNote() called with: isOpen = [" + db.isOpen() + "]");
         ContentValues values = new ContentValues();
         values.put(DatabaseUtils.COLUMN_NOTE_TITLE, note.getmTitle());
         values.put(DatabaseUtils.COLUMN_NOTE_SUBJECT, note.getmSubject());
@@ -49,8 +49,9 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
         values.put(DatabaseUtils.COLUMN_NOTE_ALARM, note.getmIsAlarm());
         values.put(DatabaseUtils.COLUMN_NOTE_IMAGE, note.getmImageNote());
         long index = db.insert(DatabaseUtils.TABLE_NAME, null, values);
-        Log.d("Vuong", "addNote() called with: index = [" + index + "]");
+        Log.d("Vuong", "requestAddNote() called with: index = [" + index + "]");
         db.close();
+        return index;
     }
 
     public List<Note> getAllNotes() {

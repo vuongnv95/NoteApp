@@ -78,6 +78,16 @@
     <dimen name="padding_addnote_delete">10dp</dimen>
     <dimen name="padding_addnote_clock">10dp</dimen>
     <dimen name="height_alarm">48dp</dimen>
+    <dimen name="with_item_imagenote">150dp</dimen>
+    <dimen name="textsize_dialog_share">16sp</dimen>
+
+    // dialog share
+    <dimen name="paddingleft_dialog_share">50dp</dimen>
+    <dimen name="text_share_facebook">16sp</dimen>
+    <dimen name="padding_share_facebook">10dp</dimen>
+    <dimen name="padding_share">8dp</dimen>
+    <dimen name="margin_tv_share">12dp</dimen>
+    <dimen name="height_item_imagenote">150dp</dimen>
 
 
 </resources>

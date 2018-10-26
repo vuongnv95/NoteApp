@@ -42,7 +42,8 @@ public class DatabaseManager implements IDatabase {
     }
 
     @Override
-    public void addNote(Note note) {
-        mNoteDatabase.addNote(note);
+    public long addNote(Note note) {
+       return mNoteDatabase.addNote(note);
+
     }
 }

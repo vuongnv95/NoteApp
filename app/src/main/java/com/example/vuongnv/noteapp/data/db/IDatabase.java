@@ -9,5 +9,5 @@ public interface IDatabase {
     List<Note> getAllNotes();
     int updateNote(Note note);
     void deleteNote(Note note);
-    void addNote(Note note);
+    long addNote(Note note);
 }

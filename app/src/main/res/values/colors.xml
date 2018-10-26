@@ -3,7 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="bg_toolbar">#0099cc</color>
+    <color name="bg_toolbar">#27bced</color>
     <color name="textcolor_item_title">#000000</color>
     <color name="bg_line_below_item">#000000</color>
     <color name="color_item_subject">#000000</color>
@@ -17,8 +17,11 @@
     <color name="choose_item_white">#ffffff</color>
 
     //editnote fragment
-    <color name="bg_navigation">#0099cc</color>
+    <color name="bg_navigation">#27bced</color>
     <color name="color_textnote">#ffffff</color>
     <color name="color_space">#f1ecec</color>
+
+    //dialog share
+    <color name="color_text_sharewith">#494343</color>
 
 </resources>

@@ -25,6 +25,10 @@
     <string name="time3">17:00</string>
     <string name="time4">20:00</string>
     <string name="time5">Other</string>
+    <string name="text_dialog_share">Share with</string>
+    <string name="text_share_twitter">Share Twitter</string>
+    <string name="text_share_line">Share Line</string>
+    <string name="text_share_facebok">Share Book</string>
 
 
     <string-array name="spin_date">

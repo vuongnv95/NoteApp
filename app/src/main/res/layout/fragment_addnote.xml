@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activitis.MainActivity">
+    tools:context=".ui.activitis.MainActivity">
 
     <LinearLayout
         android:id="@+id/rl_addnote_title"
@@ -88,27 +88,29 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/srv_note"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/rl_addnote_title">
 
         <RelativeLayout
             android:id="@+id/rl_addnote_note"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/rl_addnote_title">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_addnote_node"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_addnode_imgnote"
-                android:src="@drawable/ic_more"/>
+            <ImageView
+                android:id="@+id/iv_addnote_node"
+                android:layout_width="@dimen/with_addnode_imgnote"
+                android:src="@drawable/ic_camera"
+                android:visibility="gone"
+                android:layout_height="@dimen/height_addnode_imgnote" />
 
             <TextView
                 android:id="@+id/tv_addnote_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/rv_addnote_node"
+                android:layout_below="@+id/iv_addnote_node"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:paddingLeft="@dimen/paddingleft_editnote_time"
@@ -123,6 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_addnote_time"
                 android:hint="@string/title_editnote"
+                android:maxLines="1"
                 android:paddingLeft="@dimen/paddingright_editnote_title"
                 android:paddingRight="@dimen/paddingright_editnote_title" />
 
@@ -133,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/et_addnote_title"
                 android:hint="@string/note_editnote"
+                android:lines="3"
                 android:paddingLeft="@dimen/paddingright_editnote_title"
                 android:paddingRight="@dimen/paddingright_editnote_title" />
 
