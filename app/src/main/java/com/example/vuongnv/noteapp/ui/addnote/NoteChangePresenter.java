@@ -1,7 +1,14 @@
 package com.example.vuongnv.noteapp.ui.addnote;
 
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.util.Log;
+
 import com.example.vuongnv.noteapp.data.db.model.Note;
+import com.example.vuongnv.noteapp.data.db.model.NoteImage;
+
+import java.util.List;
 
 public class NoteChangePresenter implements NoteChangeIndicator.CallBackChangeNoteListenner{
 
@@ -21,6 +28,23 @@ public class NoteChangePresenter implements NoteChangeIndicator.CallBackChangeNo
         mNoteChangeIndicator.addNote(note,this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public List<NoteImage> requestNoteImages(Note note){
+       return mNoteChangeIndicator.getAllNoteImages(note);
+    }
+
+    public void requestAddNoteImages(Note note,List<NoteImage> arrNoteImages){
+        mNoteChangeIndicator.addNoteImages(note,arrNoteImages);
+    }
+
+    public void requestUpdateNoteImages(Note note,List<NoteImage> arrNoteImages){
+        mNoteChangeIndicator.updateNoteImages(note,arrNoteImages);
+    }
+
+    public void clickImageItem(int position){
+        Log.d("Vuong", "clickImageItem() called with: position = [" + position + "]");
+        mINoteChangeView.clickDeleteNoteImage(position);
+    }
 
     @Override
     public void updateNoteFinish(Note note) {

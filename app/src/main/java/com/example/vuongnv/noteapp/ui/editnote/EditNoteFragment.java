@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -105,6 +107,7 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
     private void setData() {
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -126,15 +129,18 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void clickBtnNaviBack() {
         Log.d(TAG, "clickBtnNaviBack() called");
         mPosition -= NEXT_INDEX;
         mIvNaviNext.setImageResource(R.drawable.ic_next);
         if (mPosition >= FIRST_INDEX) {
             mNote = mArrNote.get(mPosition);
-            mAddNoteFragment.initData(mNote);
-        } else {
-            mIvNaviNext.setImageResource(R.drawable.ic_back_hiden);
+            mAddNoteFragment.setData(mNote);
+            if (mPosition == FIRST_INDEX){
+                mIvNaviBack.setImageResource(R.drawable.ic_back_hiden);
+            }
+        }else{
             mPosition += NEXT_INDEX;
         }
     }
@@ -144,6 +150,7 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TITLE,mNote.getmTitle());
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT,mNote.getmSubject());
         sendIntent.putExtra(Intent.EXTRA_TEXT,
                 mNote.getmSubject());
         sendIntent.setType("text/plain");
@@ -180,15 +187,18 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
         alertDialog.show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void clickBtnNaviNext() {
         Log.d(TAG, "clickBtnNaviNext() called");
         mIvNaviBack.setImageResource(R.drawable.ic_back);
         mPosition += NEXT_INDEX;
         if (mPosition < mArrNote.size()) {
             mNote = mArrNote.get(mPosition);
-            mAddNoteFragment.initData(mNote);
+            mAddNoteFragment.setData(mNote);
+            if (mPosition == mArrNote.size()-1){
+                mIvNaviNext.setImageResource(R.drawable.ic_next_hiden);
+            }
         } else {
-            mIvNaviNext.setImageResource(R.drawable.ic_next_hiden);
             mPosition -= NEXT_INDEX;
         }
     }
@@ -200,6 +210,7 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
         this.mArrNote.addAll(arr);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void responeDeleteNote(boolean b) {
         clickBtnNaviBack();

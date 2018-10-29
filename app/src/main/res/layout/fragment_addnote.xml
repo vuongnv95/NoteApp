@@ -99,18 +99,17 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/rl_addnote_title">
 
-            <ImageView
-                android:id="@+id/iv_addnote_node"
-                android:layout_width="@dimen/with_addnode_imgnote"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_addnote_nodeimage"
+                android:layout_width="match_parent"
                 android:src="@drawable/ic_camera"
-                android:visibility="gone"
-                android:layout_height="@dimen/height_addnode_imgnote" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/tv_addnote_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_addnote_node"
+                android:layout_below="@+id/rv_addnote_nodeimage"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:paddingLeft="@dimen/paddingleft_editnote_time"
@@ -125,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_addnote_time"
                 android:hint="@string/title_editnote"
+                android:inputType="text"
                 android:maxLines="1"
                 android:paddingLeft="@dimen/paddingright_editnote_title"
                 android:paddingRight="@dimen/paddingright_editnote_title" />
@@ -138,6 +138,7 @@
                 android:hint="@string/note_editnote"
                 android:lines="3"
                 android:paddingLeft="@dimen/paddingright_editnote_title"
+                android:ellipsize="end"
                 android:paddingRight="@dimen/paddingright_editnote_title" />
 
             <LinearLayout
@@ -169,6 +170,7 @@
                 <Spinner
                     android:id="@+id/spin_addnote_date"
                     android:layout_width="0dp"
+                    android:minWidth="@dimen/with_spinner"
                     android:layout_weight="2"
                     android:layout_height="match_parent"
                     android:textSize="@dimen/textsize_editnote_date"
@@ -177,6 +179,7 @@
                 <Spinner
                     android:id="@+id/spin_addnote_time"
                     android:layout_width="0dp"
+                    android:minWidth="@dimen/with_spinner"
                     android:layout_weight="1.5"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/et_addnote_note"

@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.utils.DatabaseUtils;
+import com.example.vuongnv.noteapp.utils.NoteUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseUtils.TABLE_NAME);
+        db.execSQL(DatabaseUtils.SQL_DROP + DatabaseUtils.TABLE_NAME);
         onCreate(db);
     }
     public void drop(){
@@ -47,7 +48,6 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
         values.put(DatabaseUtils.COLUMN_NOTE_TIMESETUP, note.getmSetupTime());
         values.put(DatabaseUtils.COLUMN_NOTE_COLOR, note.getmColor());
         values.put(DatabaseUtils.COLUMN_NOTE_ALARM, note.getmIsAlarm());
-        values.put(DatabaseUtils.COLUMN_NOTE_IMAGE, note.getmImageNote());
         long index = db.insert(DatabaseUtils.TABLE_NAME, null, values);
         Log.d("Vuong", "requestAddNote() called with: index = [" + index + "]");
         db.close();
@@ -57,9 +57,8 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
     public List<Note> getAllNotes() {
         List<Note> noteList = new ArrayList<Note>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + DatabaseUtils.TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        Cursor cursor = db.rawQuery(DatabaseUtils.QUERY_GETALL_NOTE, null);
         int indexId = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_ID);
         int indexTitle= cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_TITLE);
         int indexSubject = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_SUBJECT);
@@ -68,7 +67,6 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
         int indexTimeSetup = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_TIMESETUP);
         int indexColor = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_COLOR);
         int indexIsAlarm= cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_ALARM);
-        int indexImage = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_IMAGE);
         cursor.moveToFirst();
         Log.d("Vuong", "getCount() called"+cursor.getCount());
         while (! cursor.isAfterLast()){
@@ -82,7 +80,6 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
             note.setmSetupTime(cursor.getString(indexTimeSetup));
             note.setmColor(Integer.parseInt(cursor.getString(indexColor)));
             note.setmIsAlarm(cursor.getInt(indexIsAlarm));
-            note.setmImageNote(cursor.getBlob(indexImage));
             noteList.add(note);
             cursor.moveToNext();
         }
@@ -100,8 +97,6 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
         values.put(DatabaseUtils.COLUMN_NOTE_TIMESETUP, note.getmSetupTime());
         values.put(DatabaseUtils.COLUMN_NOTE_COLOR, note.getmColor());
         values.put(DatabaseUtils.COLUMN_NOTE_ALARM, note.getmIsAlarm());
-        values.put(DatabaseUtils.COLUMN_NOTE_IMAGE, note.getmImageNote());
-
         // updating row
         return db.update(DatabaseUtils.TABLE_NAME, values, DatabaseUtils.COLUMN_NOTE_ID + " = ?",
                 new String[]{String.valueOf(note.getmIdNode())});

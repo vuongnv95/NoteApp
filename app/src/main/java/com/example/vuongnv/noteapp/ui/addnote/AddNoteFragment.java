@@ -4,19 +4,19 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,7 +33,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,15 +40,15 @@ import android.widget.TimePicker;
 
 import com.example.vuongnv.noteapp.R;
 import com.example.vuongnv.noteapp.data.db.model.Note;
+import com.example.vuongnv.noteapp.data.db.model.NoteImage;
+import com.example.vuongnv.noteapp.ui.adapter.NoteImageAdapter;
 import com.example.vuongnv.noteapp.ui.callback.ICallBackAddNote;
 import com.example.vuongnv.noteapp.ui.dialog.CameraDialog;
 import com.example.vuongnv.noteapp.ui.dialog.ColorDialog;
 import com.example.vuongnv.noteapp.utils.AlarmUtils;
 import com.example.vuongnv.noteapp.utils.NoteUtils;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,6 +61,7 @@ import java.util.Locale;
 @SuppressLint("ValidFragment")
 public class AddNoteFragment extends Fragment implements View.OnClickListener, CameraDialog.ICameraCall, ColorDialog.ColorBackground, INoteChangeView, TextWatcher, PopupMenu.OnMenuItemClickListener, AdapterView.OnItemSelectedListener {
     private static final String TAG = AddNoteFragment.class.getSimpleName();
+    private final int FIRST_ITEM_SPINNER = 0;
     private final int VALUE_TODAY = 0;
     private final int VALUE_TOMORROW = 1;
     private final int VALUE_NEXTWEEK = 7;
@@ -87,7 +87,8 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     private ImageView mIvFolder;
     private ImageView mIvRemove;
     private ImageView mIvAddNote;
-    private ImageView mIvImageNote;
+    private RecyclerView mRvNoteImages;
+    //    private ImageView mIvImageNote;
     private ImageView mIvMore;
     private TextView mTvAlarm;
     private TextView mTvTime;
@@ -120,12 +121,16 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     NoteChangePresenter mNoteChangePresenter;
 
     //data
-    private List mArrDate;
-    private List mArrTime;
+    private List<String> mArrDate;
+    private List<String> mArrTime;
+    private ArrayList<NoteImage> mArrNoteImages;
+    private int mPositionTimepicker;
+
 
     //adapter
     private ArrayAdapter<String> mDateAdapter;
     private ArrayAdapter<String> mTimeAdapter;
+    private NoteImageAdapter noteImageAdapter;
 
 
     @SuppressLint("ValidFragment")
@@ -135,16 +140,25 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         this.mFlagFragment = flagFragment;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_addnote, container, false);
-        initView(view);
-        setOnClick();
         //init mvp
         initMVP();
-        initData(mNote);
+        initData();
+        initView(view);
+        setOnClick();
+        setData(mNote);
         return view;
+    }
+
+    private void initData() {
+        mArrDate = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.spin_date)));
+        mArrTime = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.spin_time)));
+        mArrNoteImages = new ArrayList<>();
+        noteImageAdapter = new NoteImageAdapter(getContext(), mArrNoteImages, mNoteChangePresenter);
     }
 
     private void initView(View view) {
@@ -159,7 +173,9 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         mIvRemove = view.findViewById(R.id.iv_addnote_delete);
         mIvAddNote = view.findViewById(R.id.iv_addnote_add);
         mTvAlarm = view.findViewById(R.id.tv_addnote_alarm);
-        mIvImageNote = view.findViewById(R.id.iv_addnote_node);
+        mRvNoteImages = view.findViewById(R.id.rv_addnote_nodeimage);
+        mRvNoteImages.setLayoutManager(new GridLayoutManager(getContext(), NoteUtils.COMLUMN_IMAGE));
+//        mIvImageNote = view.findViewById(R.id.iv_addnote_node);
         mIvMore = view.findViewById(R.id.iv_addnote_more);
         mTvTime = view.findViewById(R.id.tv_addnote_time);
         mtvTitle = view.findViewById(R.id.tv_addnote_title);
@@ -181,10 +197,9 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     }
 
 
-    public void initData(Note note) {
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public void setData(Note note) {
         mNote = note;
-        mArrDate = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.spin_date)));
-        mArrTime = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.spin_time)));
         if (mNote != null) {
             mEtTitle.setText(mNote.getmTitle());
             mTvTime.setText(mNote.getmSetupTime());
@@ -200,13 +215,23 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
                 clickBtnDelete();
             }
             mIvMore.setVisibility(View.VISIBLE);
-            setImageFromBytes();
+            setNoteImages();
         } else {
             mNote = new Note();
             mTvTime.setText(getTimePresent());
             clickBtnDelete();
         }
+
+        mRvNoteImages.setAdapter(noteImageAdapter);
+        noteImageAdapter.notifyDataSetChanged();
         initDataSpinner();
+    }
+
+    //get all image in sqlite
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void setNoteImages() {
+        mArrNoteImages.clear();
+        mArrNoteImages.addAll(mNoteChangePresenter.requestNoteImages(mNote));
     }
 
     private void initDataSpinner() {
@@ -223,16 +248,11 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         );
         mSpinTime.setAdapter(mTimeAdapter);
         if (mNote.getmIsAlarm() == NoteUtils.IS_ALARM) {
-            mSpinDate.setSelection(mArrDate.size() - SELECT_POSITION);
-            mSpinTime.setSelection(mArrTime.size() - SELECT_POSITION);
-        }
-    }
-
-    private void setImageFromBytes() {
-        byte[] byteImage = mNote.getmImageNote();
-        if (byteImage != null) {
-            mIvImageNote.setImageBitmap(BitmapFactory.decodeByteArray(byteImage, 0, byteImage.length));
-            mIvImageNote.setVisibility(View.VISIBLE);
+            mPositionTimepicker = mArrDate.size() - SELECT_POSITION;
+            mSpinDate.setSelection(mPositionTimepicker);
+            mSpinTime.setSelection(mPositionTimepicker);
+        } else {
+            mPositionTimepicker = FIRST_ITEM_SPINNER;
         }
     }
 
@@ -276,9 +296,17 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     }
 
     private void clickBtnDate() {
-        new DatePickerDialog(getContext(), date, mCalendar
+        DatePickerDialog dialog = new DatePickerDialog(getContext(), date, mCalendar
                 .get(Calendar.YEAR), mCalendar.get(Calendar.MONTH),
-                mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                mCalendar.get(Calendar.DAY_OF_MONTH));
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    mSpinDate.setSelection(0);
+                }
+            }
+        });
+        dialog.show();
     }
 
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -314,6 +342,13 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
                 updateTextTime(hourOfDay, minute);
             }
         }, hour, minute, true);
+        mTimePicker.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    mSpinTime.setSelection(mPositionTimepicker);
+                }
+            }
+        });
         mTimePicker.show();
     }
 
@@ -378,44 +413,18 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     }
 
     private void getImageChoose(Intent data) {
+        Log.d(TAG, "getImageChoose() called with: data = [" + data.toString() + "]");
         if (data != null) {
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-                mIvImageNote.setVisibility(View.VISIBLE);
-                mIvImageNote.setImageBitmap(bitmap);
-                convertBitmapToBytes(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            mArrNoteImages.add(new NoteImage(mNote.getmIdNode(), data.getData().toString()));
+            noteImageAdapter.notifyDataSetChanged();
         }
     }
 
-    private void convertBitmapToBytes(Bitmap bitmap) {
-        try {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            stream.close();
-            mNote.setmImageNote(byteArray);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void getImageTake(Intent data) {
-        Log.d(TAG, "getImageTake() called with: data = [" + data + "]" + mUri.getPath());
-        Uri selectedImage = mUri;
-        Context context = getContext();
-        Bitmap bitmap;
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), mUri);
-            Log.d(TAG, "getImageTake() called with: data = [" + data + "]" + bitmap.toString());
-            mIvImageNote.setVisibility(View.VISIBLE);
-            mIvImageNote.setImageBitmap(bitmap);
-            convertBitmapToBytes(bitmap);
-        } catch (Exception e) {
-            Log.d(TAG, "getImageTake() called with: data = [" + data + "]");
-        }
+        Log.d(TAG, "getImageTake() called with: data = [" + mUri.getPath() + "]");
+        mArrNoteImages.add(new NoteImage(mNote.getmIdNode(), mUri.getPath()));
+        noteImageAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -423,7 +432,6 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         String name = getTimePresent();
         File destination = new File(Environment
                 .getExternalStorageDirectory(), name + ".jpg");
-
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         mUri = Uri.fromFile(destination);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,
@@ -508,14 +516,26 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
 
     @Override
     public void updateNoteEdit(Note note) {
-        AlarmUtils.createAlarm(getContext(),note);
+        AlarmUtils.createAlarm(getContext(), note);
+        Log.d("Vuong", "updateNoteEdit() called with: getmIdNode = [" + note.getmIdNode() + "]");
+        mNoteChangePresenter.requestUpdateNoteImages(mNote, mArrNoteImages);
         mCallBackAddNote.clickBtnAdd(note);
     }
 
     @Override
     public void updateNoteAdd(Note note) {
-        AlarmUtils.createAlarm(getContext(),note);
+        AlarmUtils.createAlarm(getContext(), note);
+        Log.d("Vuong", "index() called with: note = [" + note.getmIdNode() + "]");
+        mNote.setmIdNode(note.getmIdNode());
+        mNoteChangePresenter.requestAddNoteImages(mNote, mArrNoteImages);
         mCallBackAddNote.clickBtnAdd(note);
+    }
+
+    @Override
+    public void clickDeleteNoteImage(int position) {
+        mArrNoteImages.remove(position);
+        Log.d("Vuong", "clickDeleteNoteImage() called with: size = [" + mArrNoteImages.size() + "]");
+        noteImageAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -542,7 +562,7 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         }
         if (parent.getAdapter() == mDateAdapter) {
             getDateAlarm(position);
-        } else{
+        } else {
             getTimeAlarm(position);
         }
     }
@@ -584,8 +604,8 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         Date tomorrow = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
         String dateTomorrow = dateFormat.format(tomorrow);
-        mArrDate.set(0, dateTomorrow);
-        mDateAdapter.notifyDataSetChanged();
+//        mArrDate.set(0, dateTomorrow);
+//        mDateAdapter.notifyDataSetChanged();
         mNote.setmDate(dateTomorrow);
     }
 
@@ -594,7 +614,7 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
 
     }
 
-    public ICallBackAddNote  getICallBackAddNote(){
+    public ICallBackAddNote getICallBackAddNote() {
         return this.mCallBackAddNote;
     }
 }

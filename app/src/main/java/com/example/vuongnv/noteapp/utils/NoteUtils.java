@@ -15,4 +15,5 @@ public class NoteUtils {
     public static final int TODAY = 0;
     public static final int TOMORROW = 1;
     public static final int NEXTWEDNETDAY = 2;
+    public static final int COMLUMN_IMAGE = 3;
 }

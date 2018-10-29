@@ -1,6 +1,7 @@
 package com.example.vuongnv.noteapp.data.db.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Note implements Serializable {
     private int mIdNode;
@@ -11,7 +12,7 @@ public class Note implements Serializable {
     private String mSetupTime;
     private int mColor;
     private int mIsAlarm;
-    private byte[] mImageNote;
+    private ArrayList<String> mImagePath;
 
     public Note() {
     }
@@ -24,7 +25,7 @@ public class Note implements Serializable {
         this.mColor = mColor;
     }
 
-    public Note(String mTitle, String mSubject, String mDate, String mTime, String mSetupTime, int mColor, int mAlarm, byte[] mImageNote) {
+    public Note(String mTitle, String mSubject, String mDate, String mTime, String mSetupTime, int mColor, int mAlarm,ArrayList<String> mImagePath) {
         this.mTitle = mTitle;
         this.mSubject = mSubject;
         this.mDate = mDate;
@@ -32,17 +33,17 @@ public class Note implements Serializable {
         this.mSetupTime = mSetupTime;
         this.mColor = mColor;
         this.mIsAlarm = mAlarm;
-        this.mImageNote = mImageNote;
+        this.mImagePath = mImagePath;
     }
 
-    public Note(int mIdNode, String mTitle, String mSubject, String mDate, String mTime, int mColor, byte[] mImageNote) {
+    public Note(int mIdNode, String mTitle, String mSubject, String mDate, String mTime, int mColor, ArrayList<String> mImagePath) {
         this.mIdNode = mIdNode;
         this.mTitle = mTitle;
         this.mSubject = mSubject;
         this.mDate = mDate;
         this.mTime = mTime;
         this.mColor = mColor;
-        this.mImageNote = mImageNote;
+        this.mImagePath = mImagePath;
     }
 
     public String getmTitle() {
@@ -85,12 +86,12 @@ public class Note implements Serializable {
         this.mColor = mColor;
     }
 
-    public byte[] getmImageNote() {
-        return mImageNote;
+    public ArrayList<String> getmImagePath() {
+        return mImagePath;
     }
 
-    public void setmImageNote(byte[] mImageNote) {
-        this.mImageNote = mImageNote;
+    public void setmImagePath(ArrayList<String> mImagePath) {
+        this.mImagePath = mImagePath;
     }
 
     public int getmIdNode() {

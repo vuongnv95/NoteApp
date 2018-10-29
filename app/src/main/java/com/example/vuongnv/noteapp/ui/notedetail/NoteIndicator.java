@@ -2,16 +2,16 @@ package com.example.vuongnv.noteapp.ui.notedetail;
 
 import android.content.Context;
 
-import com.example.vuongnv.noteapp.data.db.DatabaseManager;
+import com.example.vuongnv.noteapp.data.db.NoteDatabaseManager;
 import com.example.vuongnv.noteapp.data.db.model.Note;
 
 import java.util.List;
 
 public class NoteIndicator {
-    private DatabaseManager mDatabaseManager;
+    private NoteDatabaseManager mDatabaseManager;
 
     public NoteIndicator(Context context) {
-        mDatabaseManager = DatabaseManager.getInstance(context);
+        mDatabaseManager = NoteDatabaseManager.getInstance(context);
     }
 
     public void getAllNotes(CallBackNoteListenner callBackNoteListenner){

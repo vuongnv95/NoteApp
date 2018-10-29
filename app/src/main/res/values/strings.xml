@@ -29,6 +29,7 @@
     <string name="text_share_twitter">Share Twitter</string>
     <string name="text_share_line">Share Line</string>
     <string name="text_share_facebok">Share Book</string>
+    <string name="cancel">CANCEL</string>
 
 
     <string-array name="spin_date">

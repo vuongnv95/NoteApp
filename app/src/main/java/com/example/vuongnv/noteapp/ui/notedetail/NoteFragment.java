@@ -95,6 +95,9 @@ public class NoteFragment extends Fragment implements View.OnClickListener, Adap
     @Override
     public void updateAllNotes(List<Note> arrNote) {
         mArrNote.addAll(arrNote);
+        for (Note note : arrNote){
+            Log.d("Vuong", "updateAllNotes() called with: getmIdNode = [" + note.getmIdNode() + "]");
+        }
         Log.d(TAG, "updateAllNotes() called with: arrNote = [" + arrNote.size() + "]");
         mNoteAdapter.notifyDataSetChanged();
     }

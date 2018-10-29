@@ -2,18 +2,16 @@ package com.example.vuongnv.noteapp.ui.editnote;
 
 import android.content.Context;
 
-import com.example.vuongnv.noteapp.data.db.DatabaseManager;
+import com.example.vuongnv.noteapp.data.db.NoteDatabaseManager;
 import com.example.vuongnv.noteapp.data.db.model.Note;
-import com.example.vuongnv.noteapp.ui.notedetail.NoteIndicator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EditNoteIndicator {
-    private DatabaseManager mDatabaseManager;
+    private NoteDatabaseManager mDatabaseManager;
 
     public EditNoteIndicator(Context context) {
-        mDatabaseManager = DatabaseManager.getInstance(context);
+        mDatabaseManager = NoteDatabaseManager.getInstance(context);
     }
 
     public void getAllNotes(CallBackNoteListenner callBackNoteListenner){
