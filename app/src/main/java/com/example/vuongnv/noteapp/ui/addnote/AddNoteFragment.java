@@ -22,6 +22,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,6 +46,7 @@ import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.data.db.model.NoteImage;
 import com.example.vuongnv.noteapp.ui.adapter.NoteImageAdapter;
 import com.example.vuongnv.noteapp.ui.callback.ICallBackAddNote;
+import com.example.vuongnv.noteapp.ui.customview.CustomTextView;
 import com.example.vuongnv.noteapp.ui.dialog.CameraDialog;
 import com.example.vuongnv.noteapp.ui.dialog.ColorDialog;
 import com.example.vuongnv.noteapp.utils.AlarmUtils;
@@ -86,7 +88,7 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     private Spinner mSpinDate;
     private Spinner mSpinTime;
     private EditText mEtTitle;
-    private EditText mEtNote;
+    private CustomTextView mEtNote;
     private ImageView mIvCamera;
     private ImageView mIvFolder;
     private ImageView mIvRemove;
@@ -129,7 +131,7 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     private List<String> mArrTime;
     private ArrayList<NoteImage> mArrNoteImages;
     private int mPositionTimepicker;
-
+    private int mPositionDatepicker;
 
     //adapter
     private ArrayAdapter<String> mDateAdapter;
@@ -159,8 +161,8 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     }
 
     private void initData() {
-        mArrDate = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.spin_date)));
-        mArrTime = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.spin_time)));
+        mArrDate = new ArrayList<>();
+        mArrTime = new ArrayList<>();
         mArrNoteImages = new ArrayList<>();
         noteImageAdapter = new NoteImageAdapter(getContext(), mArrNoteImages, mNoteChangePresenter);
     }
@@ -172,6 +174,7 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         mSpinTime = view.findViewById(R.id.spin_addnote_time);
         mEtTitle = view.findViewById(R.id.et_addnote_title);
         mEtNote = view.findViewById(R.id.et_addnote_note);
+        mEtNote.addTextChangedListener(this);
         mIvCamera = view.findViewById(R.id.iv_addnote_camera);
         mIvFolder = view.findViewById(R.id.iv_addnote_gallery);
         mIvRemove = view.findViewById(R.id.iv_addnote_delete);
@@ -204,6 +207,10 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void setData(Note note) {
         mNote = note;
+        mArrDate.clear();
+        mArrTime.clear();
+        mArrDate.addAll(Arrays.asList(getResources().getStringArray(R.array.spin_date)));
+        mArrTime.addAll(Arrays.asList(getResources().getStringArray(R.array.spin_time)));
         if (mNote != null) {
             mEtTitle.setText(mNote.getmTitle());
             mTvTime.setText(mNote.getmSetupTime());
@@ -257,11 +264,13 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         );
         mSpinTime.setAdapter(mTimeAdapter);
         if (mNote.getmIsAlarm() == NoteUtils.IS_ALARM) {
-            mPositionTimepicker = mArrDate.size() - SELECT_POSITION;
-            mSpinDate.setSelection(mPositionTimepicker);
+            mPositionDatepicker = mArrDate.size() - SELECT_POSITION;
+            mPositionTimepicker = mArrTime.size() - SELECT_POSITION;
+            mSpinDate.setSelection(mPositionDatepicker);
             mSpinTime.setSelection(mPositionTimepicker);
         } else {
             mPositionTimepicker = FIRST_ITEM_SPINNER;
+            mPositionDatepicker = FIRST_ITEM_SPINNER;
         }
     }
 
@@ -311,7 +320,7 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_NEGATIVE) {
-                    mSpinDate.setSelection(0);
+                    mSpinDate.setSelection(mPositionDatepicker);
                 }
             }
         });
@@ -364,10 +373,11 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     private void updateTextTime(int hourOfDay, int minute) {
         String time = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
         mNote.setmTime(time);
-        mArrTime.set(mArrTime.size() - 1, time);
+        int indexArr = mArrTime.size() - 1;
+        mArrTime.set(indexArr, time);
         mArrTime.add(OTHER_TIME);
         mTimeAdapter.notifyDataSetChanged();
-        mSpinTime.setSelection(mArrTime.size() - SELECT_POSITION);
+        mSpinTime.setSelection(indexArr);
 
     }
 
@@ -387,7 +397,6 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     }
 
     private void clickBtnDelete() {
-        mNote.setmIsAlarm(NoteUtils.NO_ALARM);
         mTvAlarm.setVisibility(View.VISIBLE);
         mSpinTime.setVisibility(View.GONE);
         mSpinDate.setVisibility(View.GONE);
@@ -395,7 +404,6 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
     }
 
     private void clickBtnAlarm() {
-        mNote.setmIsAlarm(NoteUtils.IS_ALARM);
         mSpinTime.setVisibility(View.VISIBLE);
         mSpinDate.setVisibility(View.VISIBLE);
         mIvRemove.setVisibility(View.VISIBLE);
@@ -473,6 +481,11 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         mNote.setmSetupTime(getTimePresent());
         getDateAlarm(mSpinDate.getSelectedItemPosition());
         getTimeAlarm(mSpinTime.getSelectedItemPosition());
+        if (mIvRemove.getVisibility() == View.GONE){
+            mNote.setmIsAlarm(NoteUtils.NO_ALARM);
+        }else{
+            mNote.setmIsAlarm(NoteUtils.IS_ALARM);
+        }
         switch (mFlagFragment) {
             case NoteUtils.FLAG_ADD_FRAGMENT:
                 mNoteChangePresenter.requestAddNote(mNote);

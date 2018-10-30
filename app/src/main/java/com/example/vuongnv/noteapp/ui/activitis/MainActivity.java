@@ -97,10 +97,10 @@ public class MainActivity extends AppCompatActivity implements ICallBackEditNote
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.d("Vuong", "onRequestPermissionsResult() called with: requestCode = [" + requestCode + "], permissions = [" + permissions[0] + ":" + permissions[1] + "], grantResults = [" + grantResults[0] + "]");
+        Log.d("Vuong", "onRequestPermissionsResult() called with: requestCode = [" + requestCode + "], permissions = [" + permissions[0] + ":" + permissions[1] + "], grantResults = [" + grantResults[0] + ":"+ grantResults[1] + "]");
         switch (requestCode) {
             case CODE_PERMISTION:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     //granted
                 } else {
                     Toast.makeText(this, "You are register permistion!", Toast.LENGTH_LONG).show();

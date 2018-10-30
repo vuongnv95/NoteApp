@@ -6,8 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="spinnerStyle">@style/SpinnerStyle</item>
-        <item name="android:dropDownListViewStyle">@style/SpinnerStyle</item>
         <item name="panelBackground">@color/colorAccent</item>
     </style>
     <style name="FragmentTheme" parent="Theme.AppCompat.Light">
@@ -16,11 +14,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="panelBackground">@color/colorAccent</item>
-    </style>
-
-    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner.Underlined">
-        <item name="android:divider">#000000</item>
-        <item name="android:dividerHeight">0.5dp</item>
     </style>
 
     <style name="Divider">
