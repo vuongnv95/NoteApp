@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -38,6 +39,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.vuongnv.noteapp.BuildConfig;
 import com.example.vuongnv.noteapp.R;
 import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.data.db.model.NoteImage;
@@ -49,6 +51,7 @@ import com.example.vuongnv.noteapp.utils.AlarmUtils;
 import com.example.vuongnv.noteapp.utils.NoteUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,6 +64,7 @@ import java.util.Locale;
 @SuppressLint("ValidFragment")
 public class AddNoteFragment extends Fragment implements View.OnClickListener, CameraDialog.ICameraCall, ColorDialog.ColorBackground, INoteChangeView, TextWatcher, PopupMenu.OnMenuItemClickListener, AdapterView.OnItemSelectedListener {
     private static final String TAG = AddNoteFragment.class.getSimpleName();
+    private final String FORMAT_IMAGE = ".jpg";
     private final int FIRST_ITEM_SPINNER = 0;
     private final int VALUE_TODAY = 0;
     private final int VALUE_TOMORROW = 1;
@@ -225,6 +229,11 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         mRvNoteImages.setAdapter(noteImageAdapter);
         noteImageAdapter.notifyDataSetChanged();
         initDataSpinner();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     //get all image in sqlite
@@ -422,21 +431,22 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
 
 
     private void getImageTake(Intent data) {
-        Log.d(TAG, "getImageTake() called with: data = [" + mUri.getPath() + "]");
-        mArrNoteImages.add(new NoteImage(mNote.getmIdNode(), mUri.getPath()));
+        Log.d(TAG, "getImageTake() called with: data = [" + mUri.toString() + "]");
+        mArrNoteImages.add(new NoteImage(mNote.getmIdNode(), mUri.toString()));
         noteImageAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void openCamera() {
-        String name = getTimePresent();
         File destination = new File(Environment
-                .getExternalStorageDirectory(), name + ".jpg");
+                .getExternalStorageDirectory(), Calendar.getInstance().getTimeInMillis() + FORMAT_IMAGE);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        mUri = Uri.fromFile(destination);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                mUri);
-        Log.d(TAG, "openCamera() called" + mUri.getPath());
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        mUri = FileProvider.getUriForFile(getActivity(),
+                BuildConfig.APPLICATION_ID + ".provider",
+                destination);
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, mUri);
         startActivityForResult(intent, NoteUtils.TAKE_IMAGE);
     }
 
@@ -527,7 +537,9 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         AlarmUtils.createAlarm(getContext(), note);
         Log.d("Vuong", "index() called with: note = [" + note.getmIdNode() + "]");
         mNote.setmIdNode(note.getmIdNode());
-        mNoteChangePresenter.requestAddNoteImages(mNote, mArrNoteImages);
+        if (mArrNoteImages.size() > 0) {
+            mNoteChangePresenter.requestAddNoteImages(mNote, mArrNoteImages);
+        }
         mCallBackAddNote.clickBtnAdd(note);
     }
 
@@ -604,8 +616,6 @@ public class AddNoteFragment extends Fragment implements View.OnClickListener, C
         Date tomorrow = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat(FORMAT_DATE);
         String dateTomorrow = dateFormat.format(tomorrow);
-//        mArrDate.set(0, dateTomorrow);
-//        mDateAdapter.notifyDataSetChanged();
         mNote.setmDate(dateTomorrow);
     }
 

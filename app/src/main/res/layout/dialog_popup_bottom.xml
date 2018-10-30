@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#ffffff"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
 
     <TextView
         android:id="@+id/tv_dialog_share"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_dialog_share"
         android:paddingLeft="@dimen/padding_share"
+        android:text="@string/text_dialog_share"
         android:textColor="@color/color_text_sharewith"
         android:textSize="@dimen/textsize_dialog_share"
         android:textStyle="bold" />
@@ -17,59 +17,71 @@
     <TableRow
         android:id="@+id/tr_share_facebook"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_tv_share"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_dialog_share">
+        android:layout_below="@id/tv_dialog_share"
+        android:layout_marginTop="@dimen/margin_tv_share">
+
         <ImageView
             android:layout_width="wrap_content"
-            android:src="@drawable/ic_facebook"
-            android:layout_height="match_parent" />
-        <TextView android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_facebook" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="@dimen/padding_share_facebook"
             android:text="@string/text_share_facebok"
             android:textSize="@dimen/text_share_facebook"
-            android:padding="@dimen/padding_share_facebook"
-            android:textStyle="bold"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"/>
+            android:textStyle="bold" />
     </TableRow>
+
     <TextView
         android:layout_width="match_parent"
-        android:background="#000000"
-        android:layout_height="@dimen/title_line" />
+        android:layout_height="@dimen/title_line"
+        android:background="#000000" />
+
     <TableRow
         android:id="@+id/tr_share_twitter"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_tv_share"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tr_share_facebook">
+        android:layout_below="@id/tr_share_facebook"
+        android:layout_marginTop="@dimen/margin_tv_share">
+
         <ImageView
             android:layout_width="wrap_content"
-            android:src="@drawable/ic_twitter"
-            android:layout_height="match_parent" />
-        <TextView android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_twitter" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="@dimen/padding_share_facebook"
             android:text="@string/text_share_twitter"
             android:textSize="@dimen/text_share_facebook"
-            android:padding="@dimen/padding_share_facebook"
-            android:textStyle="bold"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"/>
+            android:textStyle="bold" />
     </TableRow>
+
     <TableRow
         android:id="@+id/tr_share_line"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_tv_share"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tr_share_twitter">
+        android:layout_below="@id/tr_share_twitter"
+        android:layout_marginTop="@dimen/margin_tv_share">
+
         <ImageView
             android:layout_width="wrap_content"
-            android:src="@drawable/ic_facebook"
-            android:layout_height="match_parent" />
-        <TextView android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_facebook" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="@dimen/padding_share_facebook"
             android:text="@string/text_share_line"
             android:textSize="@dimen/text_share_facebook"
-            android:padding="@dimen/padding_share_facebook"
-            android:textStyle="bold"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"/>
+            android:textStyle="bold" />
     </TableRow>
 </RelativeLayout>

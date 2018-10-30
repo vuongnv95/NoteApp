@@ -5,7 +5,7 @@ import com.example.vuongnv.noteapp.data.db.model.Note;
 
 import java.util.List;
 
-public class NotePresenter implements NoteIndicator.CallBackNoteListenner{
+public class NotePresenter implements NoteMVPPresenter, NoteIndicator.CallBackNoteListenner {
     private INoteView mINoteView;
     private NoteIndicator mNoteIndicator;
 
@@ -14,7 +14,8 @@ public class NotePresenter implements NoteIndicator.CallBackNoteListenner{
         this.mNoteIndicator = mNoteIndicator;
     }
 
-    public void getAllNotes(){
+    @Override
+    public void getAllNotes() {
         mNoteIndicator.getAllNotes(this);
     }
 

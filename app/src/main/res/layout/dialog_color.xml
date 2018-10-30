@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
+    android:orientation="horizontal"
     android:paddingLeft="10dp"
+    android:paddingTop="20dp"
     android:paddingRight="10dp"
-    android:paddingBottom="10dp"
-    android:orientation="horizontal">
+    android:paddingBottom="10dp">
 
     <com.example.vuongnv.noteapp.ui.customview.ColorView
         android:id="@+id/cv_color_yellow"
         android:layout_width="0dp"
-        android:layout_marginLeft="10dp"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/marginleft_colorview"
         android:layout_weight="1"
         custom:color_background="@color/choose_item_red" />
 
     <com.example.vuongnv.noteapp.ui.customview.ColorView
         android:id="@+id/cv_color_green"
         android:layout_width="0dp"
-        android:layout_marginLeft="10dp"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/marginleft_colorview"
         android:layout_toRightOf="@id/cv_color_yellow"
         android:layout_weight="1"
         custom:color_background="@color/choose_item_green" />
@@ -30,8 +29,8 @@
     <com.example.vuongnv.noteapp.ui.customview.ColorView
         android:id="@+id/cv_color_light"
         android:layout_width="0dp"
-        android:layout_marginLeft="10dp"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/marginleft_colorview"
         android:layout_toRightOf="@id/cv_color_green"
         android:layout_weight="1"
         custom:color_background="@color/choose_item_light" />
@@ -39,8 +38,8 @@
     <com.example.vuongnv.noteapp.ui.customview.ColorView
         android:id="@+id/cv_color_white"
         android:layout_width="0dp"
-        android:layout_marginLeft="10dp"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/marginleft_colorview"
         android:layout_toRightOf="@id/cv_color_light"
         android:layout_weight="1"
         custom:color_background="@color/choose_item_white" />

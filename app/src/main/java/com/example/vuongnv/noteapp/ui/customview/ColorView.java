@@ -27,18 +27,18 @@ public class ColorView extends View {
 
     public ColorView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context,attrs);
+        initView(context, attrs);
     }
 
-    public ColorView(Context context,AttributeSet attrs, int defStyleAttr) {
+    public ColorView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView(context,attrs);
+        initView(context, attrs);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ColorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        initView(context,attrs);
+        initView(context, attrs);
     }
 
     @Override
@@ -46,11 +46,11 @@ public class ColorView extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heighSize = MeasureSpec.getSize(heightMeasureSpec);
-       if (widthSize < heighSize){
-           size = widthSize;
-       }else{
-           size = heighSize;
-       }
+        if (widthSize < heighSize) {
+            size = widthSize;
+        } else {
+            size = heighSize;
+        }
         setMeasuredDimension(size, size);
         Log.d("Vuong", "onMeasure() called with: widthMeasureSpec = [" + size + "], heightMeasureSpec = [" + size + "]");
     }
@@ -63,7 +63,7 @@ public class ColorView extends View {
         mPaint.setColor(mColor);
         Log.d("Vuong", "onDraw() called with: canvas = [" + mColor + "]");
         mPaint.setStyle(Paint.Style.FILL);
-       canvas.drawRect(new Rect(0,0,size,size) ,mPaint);
+        canvas.drawRect(new Rect(0, 0, size, size), mPaint);
     }
 
     private void initView(Context context, AttributeSet attrs) {
@@ -71,7 +71,7 @@ public class ColorView extends View {
                 attrs,
                 R.styleable.ColorView,
                 0, 0);
-        mColor = typedArray.getColor(R.styleable.ColorView_color_background,Color.RED);
+        mColor = typedArray.getColor(R.styleable.ColorView_color_background, Color.RED);
         Log.d("vuong", "initView() called with: context = [" + context + "], mColor = [" + mColor + "]");
     }
 }

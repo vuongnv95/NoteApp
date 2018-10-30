@@ -10,7 +10,7 @@ import com.example.vuongnv.noteapp.data.db.model.NoteImage;
 
 import java.util.List;
 
-public class NoteChangePresenter implements NoteChangeIndicator.CallBackChangeNoteListenner{
+public class NoteChangePresenter implements NoteChangMVPPresenter, NoteChangeIndicator.CallBackChangeNoteListenner {
 
     private NoteChangeIndicator mNoteChangeIndicator;
     private INoteChangeView mINoteChangeView;
@@ -20,28 +20,34 @@ public class NoteChangePresenter implements NoteChangeIndicator.CallBackChangeNo
         this.mINoteChangeView = mINoteChangeView;
     }
 
+    @Override
     public void requestUpdateNode(Note note) {
-        mNoteChangeIndicator.updateNode(note,this);
+        mNoteChangeIndicator.updateNode(note, this);
     }
 
-    public void requestAddNote(Note note){
-        mNoteChangeIndicator.addNote(note,this);
+    @Override
+    public void requestAddNote(Note note) {
+        mNoteChangeIndicator.addNote(note, this);
     }
 
+    @Override
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public List<NoteImage> requestNoteImages(Note note){
-       return mNoteChangeIndicator.getAllNoteImages(note);
+    public List<NoteImage> requestNoteImages(Note note) {
+        return mNoteChangeIndicator.getAllNoteImages(note);
     }
 
-    public void requestAddNoteImages(Note note,List<NoteImage> arrNoteImages){
-        mNoteChangeIndicator.addNoteImages(note,arrNoteImages);
+    @Override
+    public void requestAddNoteImages(Note note, List<NoteImage> arrNoteImages) {
+        mNoteChangeIndicator.addNoteImages(note, arrNoteImages);
     }
 
-    public void requestUpdateNoteImages(Note note,List<NoteImage> arrNoteImages){
-        mNoteChangeIndicator.updateNoteImages(note,arrNoteImages);
+    @Override
+    public void requestUpdateNoteImages(Note note, List<NoteImage> arrNoteImages) {
+        mNoteChangeIndicator.updateNoteImages(note, arrNoteImages);
     }
 
-    public void clickImageItem(int position){
+    @Override
+    public void clickImageItem(int position) {
         Log.d("Vuong", "clickImageItem() called with: position = [" + position + "]");
         mINoteChangeView.clickDeleteNoteImage(position);
     }

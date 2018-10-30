@@ -137,10 +137,10 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
         if (mPosition >= FIRST_INDEX) {
             mNote = mArrNote.get(mPosition);
             mAddNoteFragment.setData(mNote);
-            if (mPosition == FIRST_INDEX){
+            if (mPosition == FIRST_INDEX) {
                 mIvNaviBack.setImageResource(R.drawable.ic_back_hiden);
             }
-        }else{
+        } else {
             mPosition += NEXT_INDEX;
         }
     }
@@ -149,8 +149,8 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
         Log.d(TAG, "clickBtnNaviShare() called");
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TITLE,mNote.getmTitle());
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT,mNote.getmSubject());
+        sendIntent.putExtra(Intent.EXTRA_TITLE, mNote.getmTitle());
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, mNote.getmSubject());
         sendIntent.putExtra(Intent.EXTRA_TEXT,
                 mNote.getmSubject());
         sendIntent.setType("text/plain");
@@ -173,14 +173,23 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
             }
         });
         builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                Log.d("Vuong", "onClick() called with: dialogInterface = [" + dialogInterface + "], i = [" + i + "]");
                 mEditNotePresenter.requestDeleteNote(mNote);
                 mEditNotePresenter.requestListNode();
-                AlarmUtils.cancelAlarm(getContext(),mNote);
+                AlarmUtils.cancelAlarm(getContext(), mNote);
                 if (mArrNote.size() == FIRST_INDEX) {
+                    Log.d("Vuong", "onClick() called with:mArrNote.size() == FIRST_INDEX");
                     mAddNoteFragment.getICallBackAddNote().clickBtnBack();
+                    return;
                 }
+                if (mPosition > 0) {
+                    --mPosition;
+                }
+                mNote = mArrNote.get(mPosition);
+                mAddNoteFragment.setData(mNote);
             }
         });
         AlertDialog alertDialog = builder.create();
@@ -195,7 +204,7 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
         if (mPosition < mArrNote.size()) {
             mNote = mArrNote.get(mPosition);
             mAddNoteFragment.setData(mNote);
-            if (mPosition == mArrNote.size()-1){
+            if (mPosition == mArrNote.size() - 1) {
                 mIvNaviNext.setImageResource(R.drawable.ic_next_hiden);
             }
         } else {

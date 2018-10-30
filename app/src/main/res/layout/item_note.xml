@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:elevation="4dp"
+    android:layout_height="wrap_content"
     android:background="#ffffff"
-    android:layout_height="wrap_content">
+    android:elevation="@dimen/elevation_item_note">
 
     <RelativeLayout
         android:id="@+id/rl_item_note"
@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:padding="@dimen/padding_item_title"
-            android:text="Note1"
             android:textColor="@color/textcolor_item_title"
             android:textSize="@dimen/textsize_item_title_note"
             android:textStyle="bold" />

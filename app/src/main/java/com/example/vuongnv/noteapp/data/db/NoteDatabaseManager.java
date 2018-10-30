@@ -19,7 +19,7 @@ public class NoteDatabaseManager implements INoteDatabase {
     private static NoteDatabaseManager instance = null;
 
     public static NoteDatabaseManager getInstance(Context context) {
-        if(instance == null)
+        if (instance == null)
             instance = new NoteDatabaseManager(context);
 
         return instance;
@@ -27,8 +27,8 @@ public class NoteDatabaseManager implements INoteDatabase {
 
     public NoteDatabaseManager(Context context) {
         this.mContext = context;
-        mNoteDatabase = new NoteDatabaseHelper(mContext,DatabaseUtils.DATABASE_NAME, null, DatabaseUtils.DATABASE_VERSION);
-        mNoteImageDatabaseHelper = new NoteImageDatabaseHelper(mContext,DatabaseUtils.DATABASE_NAME_NOTE_IMAGE, null, DatabaseUtils.DATABASE_VERSION);
+        mNoteDatabase = new NoteDatabaseHelper(mContext, DatabaseUtils.DATABASE_NAME, null, DatabaseUtils.DATABASE_VERSION);
+        mNoteImageDatabaseHelper = new NoteImageDatabaseHelper(mContext, DatabaseUtils.DATABASE_NAME_NOTE_IMAGE, null, DatabaseUtils.DATABASE_VERSION);
     }
 
     @Override
@@ -48,8 +48,8 @@ public class NoteDatabaseManager implements INoteDatabase {
     }
 
     @Override
-    public void updateNoteImage(Note note,List<NoteImage> arrNoteImage) {
-        mNoteImageDatabaseHelper.updateAllNoteImage(note,arrNoteImage);
+    public void updateNoteImage(Note note, List<NoteImage> arrNoteImage) {
+        mNoteImageDatabaseHelper.updateAllNoteImage(note, arrNoteImage);
     }
 
     @Override
@@ -59,16 +59,16 @@ public class NoteDatabaseManager implements INoteDatabase {
 
     @Override
     public void deleteNoteImages(Note note) {
-            mNoteImageDatabaseHelper.deleteAllNoteImage(note.getmIdNode());
+        mNoteImageDatabaseHelper.deleteAllNoteImage(note.getmIdNode());
     }
 
     @Override
     public long addNote(Note note) {
-       return mNoteDatabase.addNote(note);
+        return mNoteDatabase.addNote(note);
     }
 
     @Override
-    public void addNoteImage(Note note,List<NoteImage> arrNoteImage) {
-        mNoteImageDatabaseHelper.addNoteImages(note,arrNoteImage);
+    public void addNoteImage(Note note, List<NoteImage> arrNoteImage) {
+        mNoteImageDatabaseHelper.addNoteImages(note, arrNoteImage);
     }
 }

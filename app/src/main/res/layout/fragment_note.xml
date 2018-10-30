@@ -8,41 +8,45 @@
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:background="@color/bg_toolbar"
-        android:layout_height="?android:attr/actionBarSize">
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/bg_toolbar">
+
         <ImageView
             android:id="@+id/iv_addnote_note"
             android:layout_width="@dimen/with_addnote_iconnode"
-            android:src="@drawable/ic_note"
+            android:layout_height="match_parent"
             android:padding="@dimen/padding_note_icon"
-            android:layout_height="match_parent" />
+            android:src="@drawable/ic_note" />
+
         <TextView
-            android:layout_toRightOf="@id/iv_addnote_note"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/iv_addnote_note"
             android:gravity="center_vertical"
             android:text="@string/note"
-            android:textStyle="bold"
             android:textColor="#ffffff"
             android:textSize="@dimen/textsize_note"
-            android:layout_height="match_parent" />
+            android:textStyle="bold" />
+
         <ImageView
             android:id="@+id/iv_addnote_add"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/marginright_btnadd"
             android:padding="@dimen/padding_note_icon"
-            android:layout_width="wrap_content"
-            android:src="@drawable/ic_plus"
-            android:layout_alignParentEnd="true"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true" />
+            android:src="@drawable/ic_plus" />
     </RelativeLayout>
+
     <GridView
         android:id="@+id/gv_note"
-        android:numColumns="2"
-        android:horizontalSpacing="@dimen/horizontal_gv_note"
-        android:verticalSpacing="@dimen/verticalspacing_gv_note"
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/margin_gv_note"
+        android:layout_height="fill_parent"
         android:layout_below="@id/rl_title"
-        android:layout_height="fill_parent"></GridView>
+        android:layout_margin="@dimen/margin_gv_note"
+        android:horizontalSpacing="@dimen/horizontal_gv_note"
+        android:numColumns="2"
+        android:verticalSpacing="@dimen/verticalspacing_gv_note"></GridView>
 
 </RelativeLayout>

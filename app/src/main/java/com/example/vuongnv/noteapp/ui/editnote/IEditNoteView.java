@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface IEditNoteView {
     void updateListNote(List<Note> arr);
+
     void responeDeleteNote(boolean b);
 }

@@ -4,13 +4,16 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.Toast;
 
 import com.example.vuongnv.noteapp.R;
 import com.example.vuongnv.noteapp.data.db.model.Note;
@@ -25,8 +28,11 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements ICallBackEditNoteI, ICallBackAddNote, NoteFragment.CallBackNoteFragment {
-    private int mFlagFragment;
+    private final int CODE_PERMISTION = 101;
+    private final long TIME_DELAY = 2000;
+    private int mPositionNote;
 
+    private int mFlagFragment;
     private FragmentManager mFragmentManager;
     private AddNoteFragment mAddNoteFragment;
     private NoteFragment mNoteFragment;
@@ -35,27 +41,54 @@ public class MainActivity extends AppCompatActivity implements ICallBackEditNote
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        registerPermistion();
+        if (savedInstanceState == null) {
+            registerPermistion();
+            createNoteDetailFragment();
+        } else {
+            switch (savedInstanceState.getInt("fragmentdtate")) {
+                case NoteUtils.FLAG_NOTE_DETAIL_FRAGMENT:
+                    createNoteDetailFragment();
+                    break;
+                case NoteUtils.FLAG_ADD_FRAGMENT:
+                    createAddFragment();
+                    break;
+                case NoteUtils.FLAG_EDIT_FRAGMENT:
+                    createEditFragment(savedInstanceState.getInt("position"));
+                    break;
+            }
+        }
+    }
+
+    private void createNoteDetailFragment() {
+        mFlagFragment = NoteUtils.FLAG_NOTE_DETAIL_FRAGMENT;
         mFragmentManager = getSupportFragmentManager();
         mNoteFragment = new NoteFragment(this);
         mFragmentManager.beginTransaction().replace(R.id.fl_main, mNoteFragment).commit();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("position", mPositionNote);
+        outState.putInt("fragmentdtate", mFlagFragment);
+    }
+
     private void registerPermistion() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1){
-            if (!checkIfAlreadyhavePermission()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!checkIfAlreadyHavePermission()) {
                 requestForSpecificPermission();
             }
         }
     }
 
     private void requestForSpecificPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MANAGE_DOCUMENTS, Manifest.permission.CAMERA}, 101);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_PERMISTION);
     }
 
-    private boolean checkIfAlreadyhavePermission() {
-        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        if (result == PackageManager.PERMISSION_GRANTED) {
+    private boolean checkIfAlreadyHavePermission() {
+        int resultReadExternal = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int resultWriteExternal = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (resultReadExternal == PackageManager.PERMISSION_GRANTED && resultWriteExternal == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
             return false;
@@ -64,12 +97,20 @@ public class MainActivity extends AppCompatActivity implements ICallBackEditNote
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.d("Vuong", "onRequestPermissionsResult() called with: requestCode = [" + requestCode + "], permissions = [" + permissions[0] + ":" + permissions[1] + "], grantResults = [" + grantResults[0] + "]");
         switch (requestCode) {
-            case 101:
+            case CODE_PERMISTION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //granted
                 } else {
-                    finish();
+                    Toast.makeText(this, "You are register permistion!", Toast.LENGTH_LONG).show();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    }, TIME_DELAY);
                 }
                 break;
             default:
@@ -80,33 +121,38 @@ public class MainActivity extends AppCompatActivity implements ICallBackEditNote
     @Override
     public void createAddFragment() {
         mFlagFragment = NoteUtils.FLAG_ADD_FRAGMENT;
-        mAddNoteFragment = new AddNoteFragment(this,null,mFlagFragment);
+        mAddNoteFragment = new AddNoteFragment(this, null, mFlagFragment);
         mFragmentManager.beginTransaction().replace(R.id.fl_main, mAddNoteFragment).addToBackStack("add").commit();
     }
 
     @Override
-    public void createEditFragment(ArrayList<Note> arrNote, int position) {
+    public void createEditFragment(int position) {
+        this.mPositionNote = position;
         mFlagFragment = NoteUtils.FLAG_EDIT_FRAGMENT;
-        mFragmentManager.beginTransaction().replace(R.id.fl_main, new EditNoteFragment(this,this,position)).addToBackStack("edit").commit();
+        mFragmentManager.beginTransaction().replace(R.id.fl_main, new EditNoteFragment(this, this, position)).addToBackStack("edit").commit();
     }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
+        mFlagFragment = NoteUtils.FLAG_NOTE_DETAIL_FRAGMENT;
         mFragmentManager.popBackStack();
     }
 
     @Override
     public void clickBtnBack() {
+        mFlagFragment = NoteUtils.FLAG_NOTE_DETAIL_FRAGMENT;
         mFragmentManager.popBackStack();
     }
 
     @Override
     public void clickBtnAdd(Note note) {
+        mFlagFragment = NoteUtils.FLAG_NOTE_DETAIL_FRAGMENT;
         mFragmentManager.popBackStack();
     }
 
     @Override
     public void clickBtnMore() {
+        mFlagFragment = NoteUtils.FLAG_NOTE_DETAIL_FRAGMENT;
         mFragmentManager.popBackStack();
         createAddFragment();
     }

@@ -6,22 +6,25 @@ import com.example.vuongnv.noteapp.ui.notedetail.NoteIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditNotePresenter implements EditNoteIndicator.CallBackNoteListenner {
+public class EditNotePresenter implements EditNoteMVPPresenter, EditNoteIndicator.CallBackNoteListenner {
     private EditNoteIndicator mEditNoteIndicator;
     private IEditNoteView mIEditNoteView;
 
-    public EditNotePresenter(EditNoteIndicator mEditNoteIndicator,IEditNoteView iEditNoteView) {
+    public EditNotePresenter(EditNoteIndicator mEditNoteIndicator, IEditNoteView iEditNoteView) {
         this.mEditNoteIndicator = mEditNoteIndicator;
         this.mIEditNoteView = iEditNoteView;
     }
 
-    public void requestListNode(){
+    @Override
+    public void requestListNode() {
         mEditNoteIndicator.getAllNotes(this);
     }
 
-    public void requestDeleteNote(Note note){
-        mEditNoteIndicator.deleteNote(note,this);
+    @Override
+    public void requestDeleteNote(Note note) {
+        mEditNoteIndicator.deleteNote(note, this);
     }
+
     @Override
     public void onLoadListNoteFinish(List<Note> arrNote) {
         mIEditNoteView.updateListNote(arrNote);

@@ -29,12 +29,12 @@ public class NoteAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mArrNote.isEmpty()? 0 : mArrNote.size();
+        return mArrNote.isEmpty() ? 0 : mArrNote.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mArrNote.isEmpty()?null:mArrNote.get(position);
+        return mArrNote.isEmpty() ? null : mArrNote.get(position);
     }
 
     @Override
@@ -45,8 +45,8 @@ public class NoteAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        if (convertView == null){
-            convertView = mLayoutInflater.inflate(R.layout.item_note,null);
+        if (convertView == null) {
+            convertView = mLayoutInflater.inflate(R.layout.item_note, null);
             viewHolder = new ViewHolder();
             viewHolder.mTvTime = convertView.findViewById(R.id.tv_item_time);
             viewHolder.mTvTitle = convertView.findViewById(R.id.tv_item_title);
@@ -54,7 +54,7 @@ public class NoteAdapter extends BaseAdapter {
             viewHolder.mIvClock = convertView.findViewById(R.id.iv_item_clock);
             viewHolder.mRlItem = convertView.findViewById(R.id.rl_item_note);
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Note note = mArrNote.get(position);
@@ -63,14 +63,14 @@ public class NoteAdapter extends BaseAdapter {
         viewHolder.mTvTime.setText(note.getmSetupTime());
         if (note.getmIsAlarm() == NoteUtils.IS_ALARM) {
             viewHolder.mIvClock.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             viewHolder.mIvClock.setVisibility(View.GONE);
         }
         viewHolder.mRlItem.setBackgroundColor(note.getmColor());
         return convertView;
     }
 
-    private class ViewHolder{
+    private class ViewHolder {
         TextView mTvTitle;
         TextView mTvSubject;
         TextView mTvTime;

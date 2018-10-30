@@ -16,8 +16,8 @@ import java.util.List;
 
 public class NoteDatabaseHelper extends SQLiteOpenHelper {
 
-    public NoteDatabaseHelper(Context context, String name,SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory,version);
+    public NoteDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
     }
 
     @Override
@@ -30,7 +30,8 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DatabaseUtils.SQL_DROP + DatabaseUtils.TABLE_NAME);
         onCreate(db);
     }
-    public void drop(){
+
+    public void drop() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseUtils.TABLE_NAME);
         onCreate(db);
@@ -60,18 +61,18 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(DatabaseUtils.QUERY_GETALL_NOTE, null);
         int indexId = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_ID);
-        int indexTitle= cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_TITLE);
+        int indexTitle = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_TITLE);
         int indexSubject = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_SUBJECT);
         int indexDate = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_DATE);
         int indexTime = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_TIME);
         int indexTimeSetup = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_TIMESETUP);
         int indexColor = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_COLOR);
-        int indexIsAlarm= cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_ALARM);
+        int indexIsAlarm = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_ALARM);
         cursor.moveToFirst();
-        Log.d("Vuong", "getCount() called"+cursor.getCount());
-        while (! cursor.isAfterLast()){
+        Log.d("Vuong", "getCount() called" + cursor.getCount());
+        while (!cursor.isAfterLast()) {
             Note note = new Note();
-            Log.d("Vuong", "titl) called"+cursor.getString(indexTitle));
+            Log.d("Vuong", "titl) called" + cursor.getString(indexTitle));
             note.setmIdNode(cursor.getInt(indexId));
             note.setmTitle(cursor.getString(indexTitle));
             note.setmSubject(cursor.getString(indexSubject));
@@ -103,9 +104,10 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void deleteNote(Note note) {
+        Log.d("Vuong", "deleteNote() called with: note = [" + note.getmIdNode() + "]");
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DatabaseUtils.TABLE_NAME, DatabaseUtils.COLUMN_NOTE_ID + " = ?",
-                new String[] { String.valueOf(note.getmIdNode()) });
+                new String[]{String.valueOf(note.getmIdNode())});
         db.close();
     }
 }

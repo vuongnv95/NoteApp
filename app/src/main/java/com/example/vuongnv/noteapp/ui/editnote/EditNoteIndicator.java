@@ -14,18 +14,19 @@ public class EditNoteIndicator {
         mDatabaseManager = NoteDatabaseManager.getInstance(context);
     }
 
-    public void getAllNotes(CallBackNoteListenner callBackNoteListenner){
+    public void getAllNotes(CallBackNoteListenner callBackNoteListenner) {
         List<Note> arrNote = mDatabaseManager.getAllNotes();
         callBackNoteListenner.onLoadListNoteFinish(arrNote);
     }
 
-    public void deleteNote(Note note,CallBackNoteListenner callBackNoteListenner){
+    public void deleteNote(Note note, CallBackNoteListenner callBackNoteListenner) {
         mDatabaseManager.deleteNote(note);
         callBackNoteListenner.deleteNodeFinish();
     }
 
-    interface CallBackNoteListenner{
+    interface CallBackNoteListenner {
         void onLoadListNoteFinish(List<Note> arr);
+
         void deleteNodeFinish();
     }
 }

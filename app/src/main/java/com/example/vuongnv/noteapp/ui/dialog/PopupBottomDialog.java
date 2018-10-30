@@ -20,7 +20,7 @@ public class PopupBottomDialog extends Dialog implements View.OnClickListener {
 
     private OnDialogMenuListener mOnDialogMenuListener;
 
-    public PopupBottomDialog(Context context,OnDialogMenuListener onDialogMenuListener) {
+    public PopupBottomDialog(Context context, OnDialogMenuListener onDialogMenuListener) {
         super(context);
         this.mOnDialogMenuListener = onDialogMenuListener;
     }
@@ -40,7 +40,7 @@ public class PopupBottomDialog extends Dialog implements View.OnClickListener {
     private void initView() {
         mTrShareFaceBook = findViewById(R.id.tr_share_facebook);
         mTrShareTwitter = findViewById(R.id.tr_share_twitter);
-        mTrShareLine= findViewById(R.id.tr_share_line);
+        mTrShareLine = findViewById(R.id.tr_share_line);
     }
 
     private void setOnclick() {
@@ -52,7 +52,7 @@ public class PopupBottomDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tr_share_facebook:
                 mOnDialogMenuListener.shareFacebook();
                 break;
@@ -62,14 +62,16 @@ public class PopupBottomDialog extends Dialog implements View.OnClickListener {
             case R.id.tr_share_line:
                 mOnDialogMenuListener.shareLine();
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
     }
 
-    public interface OnDialogMenuListener{
+    public interface OnDialogMenuListener {
         void shareFacebook();
+
         void shareTwitter();
+
         void shareLine();
     }
 }

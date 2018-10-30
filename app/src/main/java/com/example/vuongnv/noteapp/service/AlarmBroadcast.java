@@ -17,7 +17,7 @@ public class AlarmBroadcast extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d("Vuong", "onReceive() called with: context = [" + context + "], intent = [" + intent + "]");
         Intent intentStart = new Intent(context, MainActivity.class);
-        intentStart.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK );
+        intentStart.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intentStart, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)

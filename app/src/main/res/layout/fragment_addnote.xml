@@ -102,8 +102,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_addnote_nodeimage"
                 android:layout_width="match_parent"
-                android:src="@drawable/ic_camera"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_camera" />
 
             <TextView
                 android:id="@+id/tv_addnote_time"
@@ -135,64 +135,67 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/et_addnote_title"
+                android:ellipsize="end"
                 android:hint="@string/note_editnote"
                 android:lines="3"
                 android:paddingLeft="@dimen/paddingright_editnote_title"
-                android:ellipsize="end"
                 android:paddingRight="@dimen/paddingright_editnote_title" />
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/height_alarm"
                 android:layout_below="@+id/et_addnote_note"
                 android:orientation="horizontal"
-                android:weightSum="5.5"
-                android:layout_height="@dimen/height_alarm">
+                android:weightSum="5.5">
+
                 <ImageView
                     android:id="@+id/iv_addnote_clock"
                     android:layout_width="0dp"
-                    android:padding="@dimen/padding_addnote_clock"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/marginleft_editnote_clock"
+                    android:layout_weight="1"
+                    android:padding="@dimen/padding_addnote_clock"
                     android:src="@drawable/ic_clock" />
 
                 <TextView
                     android:id="@+id/tv_addnote_alarm"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:paddingLeft="@dimen/paddingleft_addnote_alarm"
                     android:paddingTop="@dimen/paddingtop_addnote_alarm"
                     android:text="@string/addnode_alarm"
-                    android:visibility="gone"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <Spinner
                     android:id="@+id/spin_addnote_date"
+                    style="@style/SpinnerStyle"
                     android:layout_width="0dp"
-                    android:minWidth="@dimen/with_spinner"
-                    android:layout_weight="2"
                     android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:minWidth="@dimen/with_spinner"
                     android:textSize="@dimen/textsize_editnote_date"
                     android:visibility="visible" />
 
                 <Spinner
                     android:id="@+id/spin_addnote_time"
+                    style="@style/SpinnerStyle"
                     android:layout_width="0dp"
-                    android:minWidth="@dimen/with_spinner"
-                    android:layout_weight="1.5"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/et_addnote_note"
                     android:layout_marginLeft="@dimen/marginleft_editnote_date"
+                    android:layout_weight="1.5"
+                    android:minWidth="@dimen/with_spinner"
                     android:textSize="@dimen/textsize_editnote_date"
                     android:visibility="visible" />
 
                 <ImageView
                     android:id="@+id/iv_addnote_delete"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:padding="@dimen/padding_addnote_delete"
-                    android:layout_height="match_parent"
                     android:src="@drawable/ic_remove"
                     android:visibility="visible" />
             </LinearLayout>

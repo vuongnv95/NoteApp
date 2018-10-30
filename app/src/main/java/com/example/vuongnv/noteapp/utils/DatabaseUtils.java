@@ -4,7 +4,7 @@ public class DatabaseUtils {
 
     //table note
     public static final int DATABASE_VERSION = 1;
-    public static final String SQL_DROP= "DROP TABLE IF EXISTS ";
+    public static final String SQL_DROP = "DROP TABLE IF EXISTS ";
     public static final String DATABASE_NAME = "NoteManager";
     public static final String DATABASE_NAME_NOTE_IMAGE = "NoteImageManager";
     public static final String TABLE_NAME = "Note";
@@ -16,7 +16,7 @@ public class DatabaseUtils {
     public static final String COLUMN_NOTE_TIMESETUP = "Note_timesetup";
     public static final String COLUMN_NOTE_COLOR = "Note_color";
     public static final String COLUMN_NOTE_ALARM = "Note_isalarm";
-    public static final String COLUMN_NOTE_IMAGE= "Note_image";
+    public static final String COLUMN_NOTE_IMAGE = "Note_image";
 
     //table image
     public static final String TABLE_IMAGE_NAME = "NoteImage";
@@ -25,7 +25,7 @@ public class DatabaseUtils {
 
     //query
     public static final String QUERY_GETALL_NOTE = "SELECT  * FROM " + DatabaseUtils.TABLE_NAME;
-    public static final String QUERY_GETALL_NOTE_IMAGE = "SELECT  * FROM " + DatabaseUtils.TABLE_IMAGE_NAME + " WHERE "+COLUMN_NOTE_ID +" = ? ";
+    public static final String QUERY_GETALL_NOTE_IMAGE = "SELECT  * FROM " + DatabaseUtils.TABLE_IMAGE_NAME + " WHERE " + COLUMN_NOTE_ID + " = ? ";
 
     public static final String CRETAE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
             + COLUMN_NOTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"

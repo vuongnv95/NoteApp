@@ -37,7 +37,7 @@ public class NoteImageDatabaseHelper extends SQLiteOpenHelper {
         List<NoteImage> noteImageList = new ArrayList<>();
         // Select All Query
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(DatabaseUtils.QUERY_GETALL_NOTE_IMAGE, new String[]{String.valueOf(note.getmIdNode())} ,null);
+        Cursor cursor = db.rawQuery(DatabaseUtils.QUERY_GETALL_NOTE_IMAGE, new String[]{String.valueOf(note.getmIdNode())}, null);
         int indexImagePathId = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_IMAGE_ID);
         int indexNoteId = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_ID);
         int indexImagePath = cursor.getColumnIndex(DatabaseUtils.COLUMN_NOTE_IMAGE_PATH);
@@ -53,12 +53,12 @@ public class NoteImageDatabaseHelper extends SQLiteOpenHelper {
         return noteImageList;
     }
 
-    public void updateAllNoteImage(Note note,List<NoteImage> arrNoteImage) {
+    public void updateAllNoteImage(Note note, List<NoteImage> arrNoteImage) {
         deleteAllNoteImage(note.getmIdNode());
-        addNoteImages(note,arrNoteImage);
+        addNoteImages(note, arrNoteImage);
     }
 
-    public void addNoteImages(Note note,List<NoteImage> arrNoteImage) {
+    public void addNoteImages(Note note, List<NoteImage> arrNoteImage) {
         SQLiteDatabase db = this.getWritableDatabase();
         for (NoteImage noteImage : arrNoteImage) {
             ContentValues values = new ContentValues();
@@ -72,7 +72,7 @@ public class NoteImageDatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteAllNoteImage(int noteId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(DatabaseUtils.TABLE_IMAGE_NAME, DatabaseUtils.COLUMN_NOTE_ID +" = ?",new String[]{String.valueOf(noteId)});
+        db.delete(DatabaseUtils.TABLE_IMAGE_NAME, DatabaseUtils.COLUMN_NOTE_ID + " = ?", new String[]{String.valueOf(noteId)});
         db.close();
     }
 }

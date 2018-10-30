@@ -25,7 +25,7 @@ public class Note implements Serializable {
         this.mColor = mColor;
     }
 
-    public Note(String mTitle, String mSubject, String mDate, String mTime, String mSetupTime, int mColor, int mAlarm,ArrayList<String> mImagePath) {
+    public Note(String mTitle, String mSubject, String mDate, String mTime, String mSetupTime, int mColor, int mAlarm, ArrayList<String> mImagePath) {
         this.mTitle = mTitle;
         this.mSubject = mSubject;
         this.mDate = mDate;

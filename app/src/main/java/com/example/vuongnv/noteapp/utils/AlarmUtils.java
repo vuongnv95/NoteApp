@@ -16,12 +16,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AlarmUtils {
-    public static final String FORMAT_TIME= "MM/dd/yyyy HH:mm";
+    public static final String FORMAT_TIME = "MM/dd/yyyy HH:mm";
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public static void createAlarm(Context context, Note note) {
-        if (note.getmIsAlarm() == NoteUtils.NO_ALARM){
-            cancelAlarm(context,note);
+        if (note.getmIsAlarm() == NoteUtils.NO_ALARM) {
+            cancelAlarm(context, note);
             return;
         }
         Intent intent = new Intent(context, AlarmBroadcast.class);
@@ -37,8 +37,8 @@ public class AlarmUtils {
         String time = note.getmDate() + " " + note.getmTime();
         SimpleDateFormat format = new SimpleDateFormat(FORMAT_TIME);
         try {
-           Calendar calendar = Calendar.getInstance();
-           calendar.setTime(format.parse(time));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(format.parse(time));
             return calendar.getTimeInMillis();
         } catch (ParseException e) {
             e.printStackTrace();

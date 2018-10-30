@@ -45,7 +45,7 @@ public class NoteImageAdapter extends RecyclerView.Adapter<NoteImageAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Bitmap bitmap = convertPathToBitmap(mNoteImages.get(i).getmPath());
         Log.d("Vuong", "onBindViewHolder() called with: mNoteImages.get(i).getmPath() = [" + mNoteImages.get(i).getmPath() + "], i = [" + i + "]");
-        if (bitmap != null){
+        if (bitmap != null) {
             viewHolder.mIvItem.setImageBitmap(bitmap);
             Log.d("Vuong", "onBindViewHolder() called with: bitmap != null");
         }
@@ -61,7 +61,7 @@ public class NoteImageAdapter extends RecyclerView.Adapter<NoteImageAdapter.View
     private Bitmap convertPathToBitmap(String path) {
         if (path != null && !path.isEmpty()) {
             try {
-                return MediaStore.Images.Media.getBitmap(mContext.getContentResolver(),Uri.parse(path));
+                return MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), Uri.parse(path));
             } catch (IOException e) {
                 e.printStackTrace();
             }

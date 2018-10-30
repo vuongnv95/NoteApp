@@ -15,7 +15,7 @@ public class CameraDialog extends Dialog implements View.OnClickListener {
     private Context mContext;
     private ICameraCall mICameraCall;
 
-    public CameraDialog(Context context,ICameraCall iCameraCall) {
+    public CameraDialog(Context context, ICameraCall iCameraCall) {
         super(context);
         this.mContext = context;
         this.mICameraCall = iCameraCall;
@@ -55,8 +55,9 @@ public class CameraDialog extends Dialog implements View.OnClickListener {
         dismiss();
     }
 
-    public interface ICameraCall{
+    public interface ICameraCall {
         void openCamera();
+
         void openGallery();
     }
 }

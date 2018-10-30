@@ -90,6 +90,10 @@
     <dimen name="height_item_imagenote">100dp</dimen>
     <dimen name="margin_item_remove">5dp</dimen>
     <dimen name="with_spinner">100dp</dimen>
+    <dimen name="textsize_spinner_item">10sp</dimen>
+    <dimen name="padding_spinner_item">5dp</dimen>
+    <dimen name="marginleft_colorview">10dp</dimen>
+    <dimen name="elevation_item_note">4dp</dimen>
 
 
 </resources>

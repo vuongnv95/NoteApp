@@ -14,11 +14,12 @@ public class NoteIndicator {
         mDatabaseManager = NoteDatabaseManager.getInstance(context);
     }
 
-    public void getAllNotes(CallBackNoteListenner callBackNoteListenner){
+    public void getAllNotes(CallBackNoteListenner callBackNoteListenner) {
         List<Note> arrNote = mDatabaseManager.getAllNotes();
         callBackNoteListenner.onLoadListNoteFinish(arrNote);
     }
-    public interface CallBackNoteListenner{
+
+    public interface CallBackNoteListenner {
         void onLoadListNoteFinish(List<Note> arrNote);
     }
 }

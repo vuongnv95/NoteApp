@@ -54,6 +54,11 @@ public class NoteFragment extends Fragment implements View.OnClickListener, Adap
         return view;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     private void initView(View view) {
         mGridView = view.findViewById(R.id.gv_note);
         mIvAdd = view.findViewById(R.id.iv_addnote_add);
@@ -89,13 +94,13 @@ public class NoteFragment extends Fragment implements View.OnClickListener, Adap
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mCallBackNoteFragment.createEditFragment(mArrNote,position);
+        mCallBackNoteFragment.createEditFragment(position);
     }
 
     @Override
     public void updateAllNotes(List<Note> arrNote) {
         mArrNote.addAll(arrNote);
-        for (Note note : arrNote){
+        for (Note note : arrNote) {
             Log.d("Vuong", "updateAllNotes() called with: getmIdNode = [" + note.getmIdNode() + "]");
         }
         Log.d(TAG, "updateAllNotes() called with: arrNote = [" + arrNote.size() + "]");
@@ -115,7 +120,7 @@ public class NoteFragment extends Fragment implements View.OnClickListener, Adap
         }
         for (int i = 0; i < mArrNote.size(); i++) {
             if (mArrNote.get(i).getmIdNode() == note.getmIdNode()) {
-                mArrNote.set(i,note);
+                mArrNote.set(i, note);
                 return;
             }
         }
@@ -124,13 +129,13 @@ public class NoteFragment extends Fragment implements View.OnClickListener, Adap
 
     @Override
     public List<Note> getListNote() {
-        return mArrNote.isEmpty()?null:mArrNote;
+        return mArrNote.isEmpty() ? null : mArrNote;
     }
 
     public interface CallBackNoteFragment {
         void createAddFragment();
 
-        void createEditFragment(ArrayList<Note> arrNote,int position);
+        void createEditFragment(int position);
     }
 
     public ArrayList<Note> getmArrNote() {
