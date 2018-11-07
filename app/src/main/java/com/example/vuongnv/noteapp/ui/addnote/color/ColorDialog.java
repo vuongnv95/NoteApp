@@ -12,7 +12,7 @@ import com.example.vuongnv.noteapp.utils.NoteUtils;
 import javax.inject.Inject;
 
 
-public class ColorDialog extends BaseDialog implements ColorView,View.OnClickListener {
+public class ColorDialog extends BaseDialog implements ColorView, View.OnClickListener {
     //
     private Context mContext;
 

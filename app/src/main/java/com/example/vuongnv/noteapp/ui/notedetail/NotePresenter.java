@@ -1,7 +1,7 @@
 package com.example.vuongnv.noteapp.ui.notedetail;
 
 
-import com.example.vuongnv.noteapp.data.db.DataManager;
+import com.example.vuongnv.noteapp.data.DataManager;
 import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.ui.base.BasePresenter;
 

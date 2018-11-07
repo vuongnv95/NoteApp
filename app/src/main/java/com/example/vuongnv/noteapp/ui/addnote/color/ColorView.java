@@ -4,8 +4,11 @@ import com.example.vuongnv.noteapp.ui.base.MvpView;
 
 public interface ColorView extends MvpView {
     void updateColorYellow();
+
     void updateColorGreen();
+
     void updateColorLight();
+
     void updateColorWhite();
 
 }

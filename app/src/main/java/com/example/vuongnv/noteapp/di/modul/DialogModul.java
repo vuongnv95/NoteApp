@@ -14,12 +14,12 @@ import dagger.Provides;
 public class DialogModul {
 
     @Provides
-    CameraMvpPresenter<CameraView> provideMvpPresenter(CameraPresenter<CameraView> cameraPresenter){
+    CameraMvpPresenter<CameraView> provideMvpPresenter(CameraPresenter<CameraView> cameraPresenter) {
         return cameraPresenter;
     }
 
     @Provides
-    ColorMvpPresenter<ColorView> provideColorMvpPresenter(ColorPresenter<ColorView> colorPresenter){
+    ColorMvpPresenter<ColorView> provideColorMvpPresenter(ColorPresenter<ColorView> colorPresenter) {
         return colorPresenter;
     }
 }

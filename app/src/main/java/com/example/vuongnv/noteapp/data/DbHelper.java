@@ -1,4 +1,4 @@
-package com.example.vuongnv.noteapp.data.db;
+package com.example.vuongnv.noteapp.data;
 
 
 import com.example.vuongnv.noteapp.data.db.model.Note;

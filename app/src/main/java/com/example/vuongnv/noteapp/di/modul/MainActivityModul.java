@@ -2,8 +2,8 @@ package com.example.vuongnv.noteapp.di.modul;
 
 import android.content.Context;
 
-import com.example.vuongnv.noteapp.data.db.DataManager;
-import com.example.vuongnv.noteapp.data.db.NoteDataManager;
+import com.example.vuongnv.noteapp.data.DataManager;
+import com.example.vuongnv.noteapp.data.NoteDataManager;
 import com.example.vuongnv.noteapp.data.db.NoteDbHelper;
 import com.example.vuongnv.noteapp.di.NoteDBhelper;
 import com.example.vuongnv.noteapp.ui.addnote.AddNoteMVPPresenter;
@@ -30,37 +30,37 @@ public class MainActivityModul {
 
     @NoteDBhelper
     @Provides
-    NoteDbHelper provideNoteDbHelper(){
+    NoteDbHelper provideNoteDbHelper() {
         return new NoteDbHelper(this.mContext);
     }
 
     @Provides
-    DataManager provideDataManager(NoteDataManager noteDataManager){
+    DataManager provideDataManager(NoteDataManager noteDataManager) {
         return noteDataManager;
     }
 
     @Provides
-    CompositeDisposable provideCompositeDisposable(){
+    CompositeDisposable provideCompositeDisposable() {
         return new CompositeDisposable();
     }
 
     @Provides
-    NoteMVPPresenter<INoteView> provideNoteMVPPresenter(NotePresenter<INoteView> viewNotePresenter){
+    NoteMVPPresenter<INoteView> provideNoteMVPPresenter(NotePresenter<INoteView> viewNotePresenter) {
         return viewNotePresenter;
     }
 
     @Provides
-    AddNoteMVPPresenter<AddNoteView> provideAddNoteMVPPresenter(AddNotePresenter<AddNoteView> addNotePresenter){
+    AddNoteMVPPresenter<AddNoteView> provideAddNoteMVPPresenter(AddNotePresenter<AddNoteView> addNotePresenter) {
         return addNotePresenter;
     }
 
     @Provides
-    EditNoteMVPPresenter<EditNoteView> provideEditNoteMVPPresenter(EditNotePresenter<EditNoteView> editNotePresenter){
+    EditNoteMVPPresenter<EditNoteView> provideEditNoteMVPPresenter(EditNotePresenter<EditNoteView> editNotePresenter) {
         return editNotePresenter;
     }
 
     @Provides
-    Context provideContext(){
+    Context provideContext() {
         return mContext;
     }
 }

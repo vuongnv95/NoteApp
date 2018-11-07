@@ -10,7 +10,7 @@ import com.example.vuongnv.noteapp.ui.base.BaseDialog;
 
 import javax.inject.Inject;
 
-public class CameraDialog extends BaseDialog implements CameraView,View.OnClickListener {
+public class CameraDialog extends BaseDialog implements CameraView, View.OnClickListener {
     //view
     private TableRow mTrTakePhoto;
     private TableRow mTrChoosePhoto;

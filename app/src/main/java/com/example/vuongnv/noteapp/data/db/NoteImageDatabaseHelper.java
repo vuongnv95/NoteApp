@@ -55,8 +55,8 @@ public class NoteImageDatabaseHelper extends SQLiteOpenHelper {
 
     public long updateAllNoteImage(Note note, List<NoteImage> arrNoteImage) {
         deleteAllNoteImage(note.getmIdNode());
-       long index =  addNoteImages(note, arrNoteImage);
-       return index;
+        long index = addNoteImages(note, arrNoteImage);
+        return index;
     }
 
     public long addNoteImages(Note note, List<NoteImage> arrNoteImage) {
@@ -66,7 +66,7 @@ public class NoteImageDatabaseHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(DatabaseUtils.COLUMN_NOTE_ID, note.getmIdNode());
             values.put(DatabaseUtils.COLUMN_NOTE_IMAGE_PATH, noteImage.getmPath());
-            index =  db.insert(DatabaseUtils.TABLE_IMAGE_NAME, null, values);
+            index = db.insert(DatabaseUtils.TABLE_IMAGE_NAME, null, values);
         }
         db.close();
         return index;

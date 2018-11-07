@@ -1,6 +1,6 @@
 package com.example.vuongnv.noteapp.ui.base;
 
-import com.example.vuongnv.noteapp.data.db.DataManager;
+import com.example.vuongnv.noteapp.data.DataManager;
 
 import javax.inject.Inject;
 

@@ -9,5 +9,6 @@ import dagger.Component;
 @Component(modules = DialogModul.class)
 public interface DialogComponent {
     void inject(CameraDialog cameraDialog);
+
     void inject(ColorDialog colorDialog);
 }

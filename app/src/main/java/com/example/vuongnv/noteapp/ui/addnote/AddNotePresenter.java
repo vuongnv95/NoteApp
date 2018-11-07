@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.vuongnv.noteapp.R;
-import com.example.vuongnv.noteapp.data.db.DataManager;
+import com.example.vuongnv.noteapp.data.DataManager;
 import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.data.db.model.NoteImage;
 import com.example.vuongnv.noteapp.ui.base.BasePresenter;
@@ -31,7 +31,7 @@ import javax.inject.Inject;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 
-public class AddNotePresenter<V extends AddNoteView> extends BasePresenter<V> implements AddNoteMVPPresenter<V>{
+public class AddNotePresenter<V extends AddNoteView> extends BasePresenter<V> implements AddNoteMVPPresenter<V> {
     private final int NUMBER_SELECT_SPINNER = 2;
     private final int VALUE_TODAY = 0;
     private final int VALUE_TOMORROW = 1;
@@ -213,7 +213,7 @@ public class AddNotePresenter<V extends AddNoteView> extends BasePresenter<V> im
         int indexArr = arrTime.size() - 1;
         arrTime.set(indexArr, time);
         arrTime.add(OTHER_TIME);
-        getView().updateTimePicker(time,arrTime);
+        getView().updateTimePicker(time, arrTime);
     }
 
     @Override
@@ -229,7 +229,7 @@ public class AddNotePresenter<V extends AddNoteView> extends BasePresenter<V> im
         int indexArr = arrDate.size() - 1;
         arrDate.set(indexArr, date);
         arrDate.add(OTHER_DATE);
-        getView().updateDatePicker(date,arrDate);
+        getView().updateDatePicker(date, arrDate);
 //        mDateAdapter.notifyDataSetChanged();
 //        mSpinDate.setSelection(indexArr);
 //        updateTextDate();

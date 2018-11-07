@@ -57,7 +57,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -239,7 +238,7 @@ public class AddNoteFragment extends BaseFragment implements View.OnClickListene
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void setNoteImages() {
         mArrNoteImages.clear();
-       mAddNotePresenter.requestNoteImages(mNote);
+        mAddNotePresenter.requestNoteImages(mNote);
     }
 
     private void initDataSpinner() {

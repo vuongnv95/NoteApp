@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements ICallBackEditNote
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.d("Vuong", "onRequestPermissionsResult() called with: requestCode = [" + requestCode + "], permissions = [" + permissions[0] + ":" + permissions[1] + "], grantResults = [" + grantResults[0] + ":"+ grantResults[1] + "]");
+        Log.d("Vuong", "onRequestPermissionsResult() called with: requestCode = [" + requestCode + "], permissions = [" + permissions[0] + ":" + permissions[1] + "], grantResults = [" + grantResults[0] + ":" + grantResults[1] + "]");
         switch (requestCode) {
             case CODE_PERMISTION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements ICallBackEditNote
     public void createEditFragment(int position) {
         this.mPositionNote = position;
         mFlagFragment = NoteUtils.FLAG_EDIT_FRAGMENT;
-        mFragmentManager.beginTransaction().replace(R.id.fl_main, new EditNoteFragment( this, position)).addToBackStack("edit").commit();
+        mFragmentManager.beginTransaction().replace(R.id.fl_main, new EditNoteFragment(this, position)).addToBackStack("edit").commit();
     }
 
     @Override

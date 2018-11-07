@@ -1,8 +1,10 @@
-package com.example.vuongnv.noteapp.data.db;
+package com.example.vuongnv.noteapp.data;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
+import com.example.vuongnv.noteapp.data.DataManager;
+import com.example.vuongnv.noteapp.data.db.NoteDbHelper;
 import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.data.db.model.NoteImage;
 
@@ -38,7 +40,7 @@ public class NoteDataManager implements DataManager {
 
     @Override
     public Observable<Long> updateNoteImage(Note note, List<NoteImage> arrNoteImage) {
-        return this.mNoteDbHelper.updateNoteImage(note,arrNoteImage);
+        return this.mNoteDbHelper.updateNoteImage(note, arrNoteImage);
     }
 
     @Override
@@ -48,7 +50,7 @@ public class NoteDataManager implements DataManager {
 
     @Override
     public Observable<Integer> deleteNoteImages(Note note) {
-        return  this.mNoteDbHelper.deleteNoteImages(note);
+        return this.mNoteDbHelper.deleteNoteImages(note);
     }
 
     @Override
@@ -58,6 +60,6 @@ public class NoteDataManager implements DataManager {
 
     @Override
     public Observable<Long> addNoteImage(Note note, List<NoteImage> arrNoteImage) {
-        return this.mNoteDbHelper.addNoteImage(note,arrNoteImage);
+        return this.mNoteDbHelper.addNoteImage(note, arrNoteImage);
     }
 }

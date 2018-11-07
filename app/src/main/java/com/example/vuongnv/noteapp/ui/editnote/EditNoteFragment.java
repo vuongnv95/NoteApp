@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.ui.addnote.AddNoteFragment;
 import com.example.vuongnv.noteapp.ui.base.BaseFragment;
 import com.example.vuongnv.noteapp.ui.callback.ICallBackAddNote;
-import com.example.vuongnv.noteapp.ui.callback.ICallBackEditNoteI;
 import com.example.vuongnv.noteapp.utils.AlarmUtils;
 import com.example.vuongnv.noteapp.utils.NoteUtils;
 
@@ -59,7 +57,7 @@ public class EditNoteFragment extends BaseFragment implements View.OnClickListen
     @Inject
     EditNoteMVPPresenter<EditNoteView> mEditNoteMVPPresenter;
 
-    public EditNoteFragment( ICallBackAddNote iCallBackAddNote, int position) {
+    public EditNoteFragment(ICallBackAddNote iCallBackAddNote, int position) {
         this.mICallBackAddNote = iCallBackAddNote;
         this.mPosition = position;
     }
@@ -218,11 +216,11 @@ public class EditNoteFragment extends BaseFragment implements View.OnClickListen
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void updateClickBtnBack(Note note,boolean isHiddenBack,int position) {
+    public void updateClickBtnBack(Note note, boolean isHiddenBack, int position) {
         this.mPosition = position;
         mIvNaviNext.setImageResource(R.drawable.ic_next);
         mAddNoteFragment.setData(note);
-        if (isHiddenBack){
+        if (isHiddenBack) {
             mIvNaviBack.setImageResource(R.drawable.ic_back_hiden);
         }
     }
@@ -233,7 +231,7 @@ public class EditNoteFragment extends BaseFragment implements View.OnClickListen
         this.mPosition = position;
         mIvNaviBack.setImageResource(R.drawable.ic_back);
         mAddNoteFragment.setData(note);
-        if (isHiddenBack){
+        if (isHiddenBack) {
             mIvNaviNext.setImageResource(R.drawable.ic_next_hiden);
         }
     }

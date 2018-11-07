@@ -17,11 +17,12 @@ import com.example.vuongnv.noteapp.ui.activitis.MainActivity;
 
 public class AlarmBroadcast extends BroadcastReceiver {
     private Context mContext;
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d("Vuong", "onReceive() called with: context = [" + context + "], intent = [" + intent + "]");
         this.mContext = context;
-        createNotification("Note1",mContext);
+        createNotification("Note1", mContext);
     }
 
     private void createNotify() {
@@ -40,6 +41,7 @@ public class AlarmBroadcast extends BroadcastReceiver {
     }
 
     private NotificationManager notifManager;
+
     public void createNotification(String aMessage, Context context) {
         final int NOTIFY_ID = 0; // ID of notification
         String id = "IdNote"; // default_channel_id
@@ -48,7 +50,7 @@ public class AlarmBroadcast extends BroadcastReceiver {
         PendingIntent pendingIntent;
         NotificationCompat.Builder builder;
         if (notifManager == null) {
-            notifManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+            notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel mChannel = notifManager.getNotificationChannel(id);
@@ -66,8 +68,7 @@ public class AlarmBroadcast extends BroadcastReceiver {
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setAutoCancel(true)
                     .setContentIntent(pendingIntent);
-        }
-        else {
+        } else {
             builder = new NotificationCompat.Builder(context, id);
             intent = new Intent(context, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

@@ -1,7 +1,5 @@
 package com.example.vuongnv.noteapp.ui.editnote;
 
-import android.view.View;
-
 import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.ui.base.MvpPresenter;
 import com.example.vuongnv.noteapp.ui.base.MvpView;

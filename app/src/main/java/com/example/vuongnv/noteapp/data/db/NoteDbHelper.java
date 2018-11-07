@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 
+import com.example.vuongnv.noteapp.data.DbHelper;
 import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.data.db.model.NoteImage;
 import com.example.vuongnv.noteapp.utils.DatabaseUtils;
@@ -90,7 +91,7 @@ public class NoteDbHelper implements DbHelper {
         return Observable.fromCallable(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
-                return  mNoteImageDatabaseHelper.deleteAllNoteImage(note.getmIdNode());
+                return mNoteImageDatabaseHelper.deleteAllNoteImage(note.getmIdNode());
             }
         });
     }
@@ -100,7 +101,7 @@ public class NoteDbHelper implements DbHelper {
         return Observable.fromCallable(new Callable<Long>() {
             @Override
             public Long call() throws Exception {
-                return  mNoteDatabase.addNote(note);
+                return mNoteDatabase.addNote(note);
             }
         });
     }

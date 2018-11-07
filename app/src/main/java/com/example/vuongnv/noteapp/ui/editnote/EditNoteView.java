@@ -10,14 +10,13 @@ public interface EditNoteView extends MvpView {
 
     void responeDeleteNote(boolean b);
 
-    void updateClickBtnBack(Note note,boolean isHiddenBack,int position);
+    void updateClickBtnBack(Note note, boolean isHiddenBack, int position);
 
-    void updateClickBtnNext(Note note,boolean isHiddenBack,int position);
+    void updateClickBtnNext(Note note, boolean isHiddenBack, int position);
 
     void updateClickBtnShare();
 
     void updateClickBtnDelete();
-
 
 
 }

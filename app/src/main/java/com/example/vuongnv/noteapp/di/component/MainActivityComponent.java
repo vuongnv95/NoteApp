@@ -12,6 +12,8 @@ import dagger.Component;
 @Component(modules = MainActivityModul.class)
 public interface MainActivityComponent {
     void inject(NoteFragment noteFragment);
+
     void inject(AddNoteFragment addNoteFragment);
+
     void inject(EditNoteFragment editNoteFragment);
 }

@@ -1,6 +1,6 @@
 package com.example.vuongnv.noteapp.ui.editnote;
 
-import com.example.vuongnv.noteapp.data.db.DataManager;
+import com.example.vuongnv.noteapp.data.DataManager;
 import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.ui.base.BasePresenter;
 
@@ -75,7 +75,7 @@ public class EditNotePresenter<V extends EditNoteView> extends BasePresenter<V> 
                 isHiddenBack = true;
 //                mIvNaviBack.setImageResource(R.drawable.ic_back_hiden);
             }
-            getView().updateClickBtnBack(note,isHiddenBack,mPosition);
+            getView().updateClickBtnBack(note, isHiddenBack, mPosition);
         } else {
             mPosition += NEXT_INDEX;
         }
@@ -94,7 +94,7 @@ public class EditNotePresenter<V extends EditNoteView> extends BasePresenter<V> 
                 isHiddenBack = true;
 //                mIvNaviNext.setImageResource(R.drawable.ic_next_hiden);
             }
-            getView().updateClickBtnNext(note,isHiddenBack,mPosition);
+            getView().updateClickBtnNext(note, isHiddenBack, mPosition);
         } else {
             mPosition -= NEXT_INDEX;
         }

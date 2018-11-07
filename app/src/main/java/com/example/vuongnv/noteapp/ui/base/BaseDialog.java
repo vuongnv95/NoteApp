@@ -9,7 +9,8 @@ import com.example.vuongnv.noteapp.di.modul.DialogModul;
 
 public class BaseDialog extends Dialog {
     private DialogComponent mDialogComponent;
-    public BaseDialog( Context context) {
+
+    public BaseDialog(Context context) {
         super(context);
         mDialogComponent = DaggerDialogComponent.builder().dialogModul(new DialogModul()).build();
     }
