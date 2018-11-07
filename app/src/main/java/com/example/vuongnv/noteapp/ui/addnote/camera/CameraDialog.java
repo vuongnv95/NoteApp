@@ -1,19 +1,22 @@
-package com.example.vuongnv.noteapp.ui.dialog;
+package com.example.vuongnv.noteapp.ui.addnote.camera;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TableRow;
 
 import com.example.vuongnv.noteapp.R;
+import com.example.vuongnv.noteapp.ui.base.BaseDialog;
 
-public class CameraDialog extends Dialog implements View.OnClickListener {
+import javax.inject.Inject;
+
+public class CameraDialog extends BaseDialog implements CameraView,View.OnClickListener {
     //view
     private TableRow mTrTakePhoto;
     private TableRow mTrChoosePhoto;
     private Context mContext;
     private ICameraCall mICameraCall;
+
 
     public CameraDialog(Context context, ICameraCall iCameraCall) {
         super(context);
@@ -21,13 +24,23 @@ public class CameraDialog extends Dialog implements View.OnClickListener {
         this.mICameraCall = iCameraCall;
     }
 
+    //MVP
+    @Inject
+    CameraMvpPresenter<CameraView> mCameraMvpPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_camera);
+        initMVP();
         setTitle(mContext.getResources().getString(R.string.insertpicture));
         initView();
         setOnclick();
+    }
+
+    private void initMVP() {
+        getmDialogComponent().inject(this);
+        mCameraMvpPresenter.attachDialog(this);
     }
 
     private void initView() {
@@ -44,16 +57,27 @@ public class CameraDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tb_camera:
-                mICameraCall.openCamera();
+                mCameraMvpPresenter.requestOpenCamera();
                 break;
             case R.id.tb_choose_image:
-                mICameraCall.openGallery();
+                mCameraMvpPresenter.requestOpenGallery();
                 break;
             default:
                 break;
         }
         dismiss();
     }
+
+    @Override
+    public void openCamera() {
+        mICameraCall.openCamera();
+    }
+
+    @Override
+    public void openGallery() {
+        mICameraCall.openGallery();
+    }
+
 
     public interface ICameraCall {
         void openCamera();

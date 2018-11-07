@@ -15,28 +15,28 @@ import android.view.View;
 import com.example.vuongnv.noteapp.R;
 
 
-public class ColorView extends View {
+public class CustomColorView extends View {
 
     private int mColor;
     private int size;
     private Paint mPaint;
 
-    public ColorView(Context context) {
+    public CustomColorView(Context context) {
         super(context);
     }
 
-    public ColorView(Context context, AttributeSet attrs) {
+    public CustomColorView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context, attrs);
     }
 
-    public ColorView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomColorView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context, attrs);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public ColorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CustomColorView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView(context, attrs);
     }
@@ -69,9 +69,9 @@ public class ColorView extends View {
     private void initView(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.ColorView,
+                R.styleable.CustomColorView,
                 0, 0);
-        mColor = typedArray.getColor(R.styleable.ColorView_color_background, Color.RED);
+        mColor = typedArray.getColor(R.styleable.CustomColorView_color_background, Color.RED);
         Log.d("vuong", "initView() called with: context = [" + context + "], mColor = [" + mColor + "]");
     }
 }

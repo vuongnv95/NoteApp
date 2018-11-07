@@ -19,18 +19,20 @@ import android.widget.ImageView;
 import com.example.vuongnv.noteapp.R;
 import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.ui.addnote.AddNoteFragment;
+import com.example.vuongnv.noteapp.ui.base.BaseFragment;
 import com.example.vuongnv.noteapp.ui.callback.ICallBackAddNote;
 import com.example.vuongnv.noteapp.ui.callback.ICallBackEditNoteI;
-import com.example.vuongnv.noteapp.ui.dialog.PopupBottomDialog;
 import com.example.vuongnv.noteapp.utils.AlarmUtils;
 import com.example.vuongnv.noteapp.utils.NoteUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 @SuppressLint("ValidFragment")
-public class EditNoteFragment extends Fragment implements View.OnClickListener, IEditNoteView, PopupBottomDialog.OnDialogMenuListener {
+public class EditNoteFragment extends BaseFragment implements View.OnClickListener, EditNoteView {
     private static final String TAG = EditNoteFragment.class.getSimpleName();
     private final int NEXT_INDEX = 1;
     private final int FIRST_INDEX = 0;
@@ -44,23 +46,20 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
     private ImageView mIvNaviNext;
 
     //interface
-    private ICallBackEditNoteI mCallBackEditNote;
     private ICallBackAddNote mICallBackAddNote;
 
     //
     private AddNoteFragment mAddNoteFragment;
 
-    //dialog
-    private PopupBottomDialog mPopupBottomDialog;
     //
     private ArrayList<Note> mArrNote;
     private int mPosition;
 
-    //mvp
-    private EditNotePresenter mEditNotePresenter;
+    //MVP
+    @Inject
+    EditNoteMVPPresenter<EditNoteView> mEditNoteMVPPresenter;
 
-    public EditNoteFragment(ICallBackEditNoteI callBackEditNote, ICallBackAddNote iCallBackAddNote, int position) {
-        this.mCallBackEditNote = callBackEditNote;
+    public EditNoteFragment( ICallBackAddNote iCallBackAddNote, int position) {
         this.mICallBackAddNote = iCallBackAddNote;
         this.mPosition = position;
     }
@@ -78,8 +77,8 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void initMVP() {
-        EditNoteIndicator editNoteIndicator = new EditNoteIndicator(getContext());
-        mEditNotePresenter = new EditNotePresenter(editNoteIndicator, this);
+        getmMainActivityComponent().inject(this);
+        mEditNoteMVPPresenter.atttachView(this);
     }
 
     private void initView(View view) {
@@ -100,7 +99,7 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
 
     private void initData() {
         this.mArrNote = new ArrayList<>();
-        mEditNotePresenter.requestListNode();
+        mEditNoteMVPPresenter.requestListNode();
         this.mNote = this.mArrNote.get(this.mPosition);
     }
 
@@ -112,16 +111,20 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_editnote_bottom_back:
-                clickBtnNaviBack();
+                mEditNoteMVPPresenter.requestClickBtnBack(mPosition);
+//                clickBtnNaviBack();
                 break;
             case R.id.iv_editnote_bottom_share:
-                clickBtnNaviShare();
+                mEditNoteMVPPresenter.requestClickBtnShare();
+//                clickBtnNaviShare();
                 break;
             case R.id.iv_editnote_bottom_delete:
-                clickBtnNaviDelete(mArrNote.get(mPosition));
+                mEditNoteMVPPresenter.requestClickBtnDelete();
+//                clickBtnNaviDelete(mArrNote.get(mPosition));
                 break;
             case R.id.iv_editnote_bottom_next:
-                clickBtnNaviNext();
+                mEditNoteMVPPresenter.requestClickBtnNext(mPosition);
+//                clickBtnNaviNext();
                 break;
             default:
                 Log.d(TAG, "onClick() called with: v = [" + v + "]");
@@ -145,18 +148,6 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
         }
     }
 
-    private void clickBtnNaviShare() {
-        Log.d(TAG, "clickBtnNaviShare() called");
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TITLE, mNote.getmTitle());
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT, mNote.getmSubject());
-        sendIntent.putExtra(Intent.EXTRA_TEXT,
-                mNote.getmSubject());
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
-    }
-
     private void clickBtnNaviDelete(Note note) {
         Log.d(TAG, "clickBtnNaviDelete() called");
         showDialogConFirmDel();
@@ -177,8 +168,8 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Log.d("Vuong", "onClick() called with: dialogInterface = [" + dialogInterface + "], i = [" + i + "]");
-                mEditNotePresenter.requestDeleteNote(mNote);
-                mEditNotePresenter.requestListNode();
+                mEditNoteMVPPresenter.requestDeleteNote(mNote);
+                mEditNoteMVPPresenter.requestListNode();
                 AlarmUtils.cancelAlarm(getContext(), mNote);
                 if (mArrNote.size() == FIRST_INDEX) {
                     Log.d("Vuong", "onClick() called with:mArrNote.size() == FIRST_INDEX");
@@ -225,18 +216,42 @@ public class EditNoteFragment extends Fragment implements View.OnClickListener, 
         clickBtnNaviBack();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void shareFacebook() {
+    public void updateClickBtnBack(Note note,boolean isHiddenBack,int position) {
+        this.mPosition = position;
+        mIvNaviNext.setImageResource(R.drawable.ic_next);
+        mAddNoteFragment.setData(note);
+        if (isHiddenBack){
+            mIvNaviBack.setImageResource(R.drawable.ic_back_hiden);
+        }
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void updateClickBtnNext(Note note, boolean isHiddenBack, int position) {
+        this.mPosition = position;
+        mIvNaviBack.setImageResource(R.drawable.ic_back);
+        mAddNoteFragment.setData(note);
+        if (isHiddenBack){
+            mIvNaviNext.setImageResource(R.drawable.ic_next_hiden);
+        }
     }
 
     @Override
-    public void shareTwitter() {
-
+    public void updateClickBtnShare() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TITLE, mNote.getmTitle());
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, mNote.getmSubject());
+        sendIntent.putExtra(Intent.EXTRA_TEXT,
+                mNote.getmSubject());
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 
     @Override
-    public void shareLine() {
-
+    public void updateClickBtnDelete() {
+        showDialogConFirmDel();
     }
 }

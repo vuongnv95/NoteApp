@@ -8,6 +8,7 @@
     <LinearLayout
         android:id="@+id/rl_addnote_title"
         android:layout_width="match_parent"
+        android:weightSum="6"
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/bg_toolbar"
         android:orientation="horizontal">

@@ -9,7 +9,6 @@ import android.util.Log;
 
 import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.utils.DatabaseUtils;
-import com.example.vuongnv.noteapp.utils.NoteUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,11 +102,12 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(note.getmIdNode())});
     }
 
-    public void deleteNote(Note note) {
+    public int deleteNote(Note note) {
         Log.d("Vuong", "deleteNote() called with: note = [" + note.getmIdNode() + "]");
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(DatabaseUtils.TABLE_NAME, DatabaseUtils.COLUMN_NOTE_ID + " = ?",
+        int index = db.delete(DatabaseUtils.TABLE_NAME, DatabaseUtils.COLUMN_NOTE_ID + " = ?",
                 new String[]{String.valueOf(note.getmIdNode())});
         db.close();
+        return index;
     }
 }

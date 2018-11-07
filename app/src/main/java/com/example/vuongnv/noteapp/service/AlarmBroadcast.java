@@ -13,7 +13,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.vuongnv.noteapp.R;
-import com.example.vuongnv.noteapp.data.db.model.Note;
 import com.example.vuongnv.noteapp.ui.activitis.MainActivity;
 
 public class AlarmBroadcast extends BroadcastReceiver {

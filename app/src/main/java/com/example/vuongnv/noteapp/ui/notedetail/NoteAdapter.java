@@ -1,4 +1,4 @@
-package com.example.vuongnv.noteapp.ui.adapter;
+package com.example.vuongnv.noteapp.ui.notedetail;
 
 import android.content.Context;
 import android.view.LayoutInflater;

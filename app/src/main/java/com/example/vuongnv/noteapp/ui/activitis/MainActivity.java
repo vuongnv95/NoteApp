@@ -24,8 +24,6 @@ import com.example.vuongnv.noteapp.ui.editnote.EditNoteFragment;
 import com.example.vuongnv.noteapp.ui.notedetail.NoteFragment;
 import com.example.vuongnv.noteapp.utils.NoteUtils;
 
-import java.util.ArrayList;
-
 
 public class MainActivity extends AppCompatActivity implements ICallBackEditNoteI, ICallBackAddNote, NoteFragment.CallBackNoteFragment {
     private final int CODE_PERMISTION = 101;
@@ -129,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements ICallBackEditNote
     public void createEditFragment(int position) {
         this.mPositionNote = position;
         mFlagFragment = NoteUtils.FLAG_EDIT_FRAGMENT;
-        mFragmentManager.beginTransaction().replace(R.id.fl_main, new EditNoteFragment(this, this, position)).addToBackStack("edit").commit();
+        mFragmentManager.beginTransaction().replace(R.id.fl_main, new EditNoteFragment( this, position)).addToBackStack("edit").commit();
     }
 
     @Override
@@ -145,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements ICallBackEditNote
     }
 
     @Override
-    public void clickBtnAdd(Note note) {
+    public void popFragmentBackStack(Note note) {
         mFlagFragment = NoteUtils.FLAG_NOTE_DETAIL_FRAGMENT;
         mFragmentManager.popBackStack();
     }

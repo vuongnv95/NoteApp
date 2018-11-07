@@ -1,26 +1,31 @@
 package com.example.vuongnv.noteapp.ui.notedetail;
 
 
+import com.example.vuongnv.noteapp.data.db.DataManager;
 import com.example.vuongnv.noteapp.data.db.model.Note;
+import com.example.vuongnv.noteapp.ui.base.BasePresenter;
 
 import java.util.List;
 
-public class NotePresenter implements NoteMVPPresenter, NoteIndicator.CallBackNoteListenner {
-    private INoteView mINoteView;
-    private NoteIndicator mNoteIndicator;
+import javax.inject.Inject;
 
-    public NotePresenter(INoteView mINoteView, NoteIndicator mNoteIndicator) {
-        this.mINoteView = mINoteView;
-        this.mNoteIndicator = mNoteIndicator;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+
+public class NotePresenter<V extends INoteView> extends BasePresenter<V> implements NoteMVPPresenter<V> {
+
+    @Inject
+    public NotePresenter(DataManager mNoteDataManager, CompositeDisposable mCompositeDisposable) {
+        super(mNoteDataManager, mCompositeDisposable);
     }
 
     @Override
     public void getAllNotes() {
-        mNoteIndicator.getAllNotes(this);
-    }
-
-    @Override
-    public void onLoadListNoteFinish(List<Note> arrNote) {
-        mINoteView.updateAllNotes(arrNote);
+        getDataManager().getAllNotes().subscribe(new Consumer<List<Note>>() {
+            @Override
+            public void accept(List<Note> notes) throws Exception {
+                getView().updateAllNotes(notes);
+            }
+        });
     }
 }

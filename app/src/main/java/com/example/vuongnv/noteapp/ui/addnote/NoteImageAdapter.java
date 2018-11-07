@@ -1,9 +1,7 @@
-package com.example.vuongnv.noteapp.ui.adapter;
+package com.example.vuongnv.noteapp.ui.addnote;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -16,7 +14,6 @@ import android.widget.ImageView;
 
 import com.example.vuongnv.noteapp.R;
 import com.example.vuongnv.noteapp.data.db.model.NoteImage;
-import com.example.vuongnv.noteapp.ui.addnote.NoteChangePresenter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,13 +22,13 @@ public class NoteImageAdapter extends RecyclerView.Adapter<NoteImageAdapter.View
     private ArrayList<NoteImage> mNoteImages;
     private LayoutInflater mInflater;
     private Context mContext;
-    private NoteChangePresenter mNoteChangePresenter;
+    private AddNotePresenter mAddNotePresenter;
 
-    public NoteImageAdapter(Context context, ArrayList<NoteImage> noteImages, NoteChangePresenter noteChangePresenter) {
+    public NoteImageAdapter(Context context, ArrayList<NoteImage> noteImages, AddNotePresenter noteChangePresenter) {
         this.mNoteImages = noteImages;
         this.mContext = context;
         mInflater = LayoutInflater.from(context);
-        this.mNoteChangePresenter = noteChangePresenter;
+        this.mAddNotePresenter = noteChangePresenter;
     }
 
     @NonNull
@@ -52,7 +49,7 @@ public class NoteImageAdapter extends RecyclerView.Adapter<NoteImageAdapter.View
         viewHolder.mIvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNoteChangePresenter.clickImageItem(i);
+                mAddNotePresenter.requestClickDeleteImageItem(i);
                 Log.d("Vuong", "onClick() called with: i = [" + i + "]");
             }
         });
@@ -88,7 +85,7 @@ public class NoteImageAdapter extends RecyclerView.Adapter<NoteImageAdapter.View
         @Override
         public void onClick(View v) {
             Log.d("Vuong", "onClick() called with: v = [" + this.getPosition() + "]");
-            mNoteChangePresenter.clickImageItem(this.getPosition());
+            mAddNotePresenter.requestClickDeleteImageItem(this.getPosition());
         }
     }
 }

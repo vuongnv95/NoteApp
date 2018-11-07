@@ -6,11 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
 
-import com.example.vuongnv.noteapp.data.db.model.NoteImage;
+import android.support.annotation.RequiresApi;
+
 import com.example.vuongnv.noteapp.data.db.model.Note;
+import com.example.vuongnv.noteapp.data.db.model.NoteImage;
 import com.example.vuongnv.noteapp.utils.DatabaseUtils;
 
 import java.util.ArrayList;
@@ -53,26 +53,29 @@ public class NoteImageDatabaseHelper extends SQLiteOpenHelper {
         return noteImageList;
     }
 
-    public void updateAllNoteImage(Note note, List<NoteImage> arrNoteImage) {
+    public long updateAllNoteImage(Note note, List<NoteImage> arrNoteImage) {
         deleteAllNoteImage(note.getmIdNode());
-        addNoteImages(note, arrNoteImage);
+       long index =  addNoteImages(note, arrNoteImage);
+       return index;
     }
 
-    public void addNoteImages(Note note, List<NoteImage> arrNoteImage) {
+    public long addNoteImages(Note note, List<NoteImage> arrNoteImage) {
         SQLiteDatabase db = this.getWritableDatabase();
+        long index = 0;
         for (NoteImage noteImage : arrNoteImage) {
             ContentValues values = new ContentValues();
             values.put(DatabaseUtils.COLUMN_NOTE_ID, note.getmIdNode());
             values.put(DatabaseUtils.COLUMN_NOTE_IMAGE_PATH, noteImage.getmPath());
-            db.insert(DatabaseUtils.TABLE_IMAGE_NAME, null, values);
+            index =  db.insert(DatabaseUtils.TABLE_IMAGE_NAME, null, values);
         }
         db.close();
+        return index;
     }
 
-
-    public void deleteAllNoteImage(int noteId) {
+    public int deleteAllNoteImage(int noteId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(DatabaseUtils.TABLE_IMAGE_NAME, DatabaseUtils.COLUMN_NOTE_ID + " = ?", new String[]{String.valueOf(noteId)});
+        int index = db.delete(DatabaseUtils.TABLE_IMAGE_NAME, DatabaseUtils.COLUMN_NOTE_ID + " = ?", new String[]{String.valueOf(noteId)});
         db.close();
+        return index;
     }
 }

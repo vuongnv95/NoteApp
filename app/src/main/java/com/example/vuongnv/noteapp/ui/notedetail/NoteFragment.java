@@ -15,14 +15,16 @@ import android.widget.ImageView;
 
 import com.example.vuongnv.noteapp.R;
 import com.example.vuongnv.noteapp.data.db.model.Note;
-import com.example.vuongnv.noteapp.ui.adapter.NoteAdapter;
+import com.example.vuongnv.noteapp.ui.base.BaseFragment;
 import com.example.vuongnv.noteapp.ui.callback.ICallNoteFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 @SuppressLint("ValidFragment")
-public class NoteFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, INoteView, ICallNoteFragment {
+public class NoteFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, INoteView, ICallNoteFragment {
     private static final String TAG = NoteFragment.class.getSimpleName();
 
     //view
@@ -34,10 +36,9 @@ public class NoteFragment extends Fragment implements View.OnClickListener, Adap
     //
     CallBackNoteFragment mCallBackNoteFragment;
 
-    //MVP
-    NotePresenter mNotePresenter;
-    NoteIndicator mNoteIndicator;
-
+    //Dagger
+    @Inject
+    NoteMVPPresenter<INoteView> mINoteViewNotePresenter;
 
     @SuppressLint("ValidFragment")
     public NoteFragment(CallBackNoteFragment callBackNoteFragment) {
@@ -48,10 +49,16 @@ public class NoteFragment extends Fragment implements View.OnClickListener, Adap
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_note, container, false);
+        getmMainActivityComponent().inject(this);
+        initPresenter();
         initView(view);
         initData();
         setOnclick();
         return view;
+    }
+
+    private void initPresenter() {
+        mINoteViewNotePresenter.atttachView(this);
     }
 
     @Override
@@ -74,9 +81,7 @@ public class NoteFragment extends Fragment implements View.OnClickListener, Adap
         mArrNote = new ArrayList<>();
         mNoteAdapter = new NoteAdapter(getContext(), mArrNote);
         mGridView.setAdapter(mNoteAdapter);
-        mNoteIndicator = new NoteIndicator(getContext());
-        mNotePresenter = new NotePresenter(this, mNoteIndicator);
-        mNotePresenter.getAllNotes();
+        mINoteViewNotePresenter.getAllNotes();
     }
 
     @Override
