@@ -2,10 +2,7 @@ package com.example.vuongnv.noteapp.di.modul;
 
 import android.content.Context;
 
-import com.example.vuongnv.noteapp.data.DataManager;
-import com.example.vuongnv.noteapp.data.NoteDataManager;
-import com.example.vuongnv.noteapp.data.db.NoteDbHelper;
-import com.example.vuongnv.noteapp.di.NoteDBhelper;
+import com.example.vuongnv.noteapp.di.ActivityContext;
 import com.example.vuongnv.noteapp.ui.addnote.AddNoteMVPPresenter;
 import com.example.vuongnv.noteapp.ui.addnote.AddNotePresenter;
 import com.example.vuongnv.noteapp.ui.addnote.AddNoteView;
@@ -20,25 +17,8 @@ import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 
-@Module
+@Module(includes = ActivityContextModul.class)
 public class MainActivityModul {
-    private Context mContext;
-
-    public MainActivityModul(Context mContext) {
-        this.mContext = mContext;
-    }
-
-    @NoteDBhelper
-    @Provides
-    NoteDbHelper provideNoteDbHelper() {
-        return new NoteDbHelper(this.mContext);
-    }
-
-    @Provides
-    DataManager provideDataManager(NoteDataManager noteDataManager) {
-        return noteDataManager;
-    }
-
     @Provides
     CompositeDisposable provideCompositeDisposable() {
         return new CompositeDisposable();
@@ -60,7 +40,7 @@ public class MainActivityModul {
     }
 
     @Provides
-    Context provideContext() {
-        return mContext;
+    Context provideContext(@ActivityContext Context context) {
+        return context;
     }
 }

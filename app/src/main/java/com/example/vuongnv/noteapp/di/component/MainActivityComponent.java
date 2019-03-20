@@ -1,6 +1,7 @@
 package com.example.vuongnv.noteapp.di.component;
 
-import com.example.vuongnv.noteapp.di.NoteDBhelper;
+import com.example.vuongnv.noteapp.di.ActivityScope;
+import com.example.vuongnv.noteapp.di.ApplicationScope;
 import com.example.vuongnv.noteapp.di.modul.MainActivityModul;
 import com.example.vuongnv.noteapp.ui.addnote.AddNoteFragment;
 import com.example.vuongnv.noteapp.ui.editnote.EditNoteFragment;
@@ -8,8 +9,8 @@ import com.example.vuongnv.noteapp.ui.notedetail.NoteFragment;
 
 import dagger.Component;
 
-@NoteDBhelper
-@Component(modules = MainActivityModul.class)
+@ActivityScope
+@Component(modules = MainActivityModul.class,dependencies = NoteHelperComponent.class)
 public interface MainActivityComponent {
     void inject(NoteFragment noteFragment);
 
